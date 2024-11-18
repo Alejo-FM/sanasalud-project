@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS Ciudad (
 );
 
 CREATE TABLE IF NOT EXISTS Paciente (
-    cedula number NOT NULL,
+    cedula numeric NOT NULL,
     nombre varchar NOT NULL,
     apellido varchar NOT NULL,
     fecha_nacimiento date NOT NULL,
@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS Paciente (
 );
 
 CREATE TABLE IF NOT EXISTS Medico (
-    cedula number NOT NULL,
-    cod_colegio_medico number NOT NULL,
+    cedula numeric NOT NULL,
+    cod_colegio_medico numeric NOT NULL,
     nombre varchar NOT NULL,
     apellido varchar NOT NULL,
     fecha_nacimiento date NOT NULL,
@@ -127,14 +127,14 @@ CREATE TABLE IF NOT EXISTS Area (
     piso varchar NOT NULL,
     pasillo varchar NOT NULL,
     especialidad uuid NOT NULL,
-    ci_medico_encargado number NOT NULL,
+    ci_medico_encargado numeric NOT NULL,
     PRIMARY KEY (id_area),
     CONSTRAINT "fk_especialidad_area" FOREIGN KEY (especialidad) REFERENCES Especialidad(id_especialidad),
     CONSTRAINT "fk_medico_encargado" FOREIGN KEY (ci_medico_encargado) REFERENCES Medico(cedula)
 );
 
 CREATE TABLE IF NOT EXISTS Personal_Sanitario (
-    ci_personal number NOT NULL,
+    ci_personal numeric NOT NULL,
     nombre varchar NOT NULL,
     apellido varchar NOT NULL,
     funcion varchar NOT NULL,
@@ -144,16 +144,16 @@ CREATE TABLE IF NOT EXISTS Personal_Sanitario (
 );
 
 CREATE TABLE IF NOT EXISTS Cama (
-    numero_cama number NOT NULL,
+    numero_cama numeric NOT NULL,
     area_hospital uuid NOT NULL,
-    PRIMARY KEY (numero_cama, area_hospital),
+    PRIMARY KEY (numero_cama), -- ! Chekear si area_hospital es PK
     CONSTRAINT "fk_area_hospital" FOREIGN KEY (area_hospital) REFERENCES Area(id_area)
 );
 
 CREATE TABLE IF NOT EXISTS Aplica (
     medicamento uuid NOT NULL,
     tratamiento uuid NOT NULL,
-    cant_dias number NOT NULL,
+    cant_dias numeric NOT NULL,
     fecha_inicio date NOT NULL,
     fecha_fin date NOT NULL,
     PRIMARY KEY (medicamento, tratamiento),
@@ -162,28 +162,28 @@ CREATE TABLE IF NOT EXISTS Aplica (
 );
 
 CREATE TABLE IF NOT EXISTS PRESCRIBE (
-    ci_medico number NOT NULL,
-    ci_paciente number NOT NULL,
+    ci_medico numeric NOT NULL,
+    ci_paciente numeric NOT NULL,
     tratamiento uuid NOT NULL,
-    numero_ingreso number NOT NULL,
+    numero_ingreso numeric NOT NULL,
     fecha_elaboracion date NOT NULL,
     PRIMARY KEY (ci_medico, ci_paciente, tratamiento),
-    CONSTRAINT "fk_medico" FOREIGN KEY (medico) REFERENCES Medico(cedula),
-    CONSTRAINT "fk_paciente" FOREIGN KEY (paciente) REFERENCES Paciente(cedula),
+    CONSTRAINT "fk_medico" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
+    CONSTRAINT "fk_paciente" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
     CONSTRAINT "fk_tratamiento_prescribe" FOREIGN KEY (tratamiento) REFERENCES Tratamiento(id_tratamiento)
 );
 
 CREATE TABLE IF NOT EXISTS Tiene (
-    ci_medico number NOT NULL,
+    ci_medico numeric NOT NULL,
     id_especialidad uuid NOT NULL,
-    años_experiencia number NOT NULL,
+    años_experiencia numeric NOT NULL,
     PRIMARY KEY (ci_medico, id_especialidad),
     CONSTRAINT "fk_medico_tiene" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
     CONSTRAINT "fk_especialidad_tiene" FOREIGN KEY (id_especialidad) REFERENCES Especialidad(id_especialidad)
 );
 
 CREATE TABLE IF NOT EXISTS Trabaja (
-    ci_medico number NOT NULL,
+    ci_medico numeric NOT NULL,
     id_area uuid NOT NULL,
     fecha date NOT NULL,
     PRIMARY KEY (ci_medico, id_area),
@@ -192,13 +192,13 @@ CREATE TABLE IF NOT EXISTS Trabaja (
 );
 
 CREATE TABLE IF NOT EXISTS Practica (
-    ci_medico number NOT NULL,
-    ci_paciente number NOT NULL,
+    ci_medico numeric NOT NULL,
+    ci_paciente numeric NOT NULL,
     intervencion uuid NOT NULL,
-    personal_sanitario number NOT NULL,
+    personal_sanitario numeric NOT NULL,
     fecha date NOT NULL,
     riesgo varchar NOT NULL,
-    duracion number NOT NULL,
+    duracion numeric NOT NULL,
     gasto_equipos float NOT NULL,
     costo float NOT NULL,
     honorario_equipo float NOT NULL,
@@ -210,10 +210,10 @@ CREATE TABLE IF NOT EXISTS Practica (
 );
 
 CREATE TABLE IF NOT EXISTS Realiza (
-    ci_medico number NOT NULL,
-    ci_paciente number NOT NULL,
+    ci_medico numeric NOT NULL,
+    ci_paciente numeric NOT NULL,
     diagnostico uuid NOT NULL,
-    numero_ingreso number NOT NULL,
+    numero_ingreso numeric NOT NULL,
     fecha_elaboracion date NOT NULL,
     PRIMARY KEY (ci_medico, ci_paciente, diagnostico),
     CONSTRAINT "fk_medico_realiza" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
@@ -222,11 +222,11 @@ CREATE TABLE IF NOT EXISTS Realiza (
 );
 
 CREATE TABLE IF NOT EXISTS Ocupa (
-    ci_paciente number NOT NULL,
-    numero_cama number NOT NULL,
+    ci_paciente numeric NOT NULL,
+    numero_cama numeric NOT NULL,
     fecha_inicio date NOT NULL,
-    cantidad_dias number NOT NULL,
-    dias_cubiertos_seguro number NOT NULL,
+    cantidad_dias numeric NOT NULL,
+    dias_cubiertos_seguro numeric NOT NULL,
     costo_diario float NOT NULL,
     status varchar NOT NULL,
     PRIMARY KEY (ci_paciente, numero_cama),

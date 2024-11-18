@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     container_name: sanasalud-db
-    image: postgres:14.4
+    image: postgres:16
     ports:
       - "${DB_PORT}:5432"
     environment:
