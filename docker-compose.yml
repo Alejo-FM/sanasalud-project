@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    container_name: sanasalud-db
+    image: postgres:14.4
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./OLTP/database.sql:/docker-entrypoint-initdb.d/create_database.sql
+
+volumes:
+  pgdata:
