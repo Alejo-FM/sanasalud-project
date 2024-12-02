@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "docker-compose up -d",
+    "delete": "docker-compose down -v",
     "reset": "docker-compose down -v && docker-compose up -d"
   },
   "author": "Dream Team",
