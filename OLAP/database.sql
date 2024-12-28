@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_diagnostico ( -- !READY
     PRIMARY KEY (sk_dim_diagnostico)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_paciente (
+CREATE TABLE IF NOT EXISTS OLAP.dim_paciente ( -- !READY
     sk_dim_paciente integer NOT NULL,
     cedula numeric NOT NULL, -- * Natural Key
     nombre_completo varchar NOT NULL, 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_area ( -- !READY
 
 CREATE TABLE IF NOT EXISTS OLAP.dim_riesgo (
     sk_dim_riesgo integer NOT NULL,
-    id_riesgo uuid NOT NULL,
+    id_riesgo integer NOT NULL,
     descripcion varchar NOT NULL,
     PRIMARY KEY (sk_dim_riesgo)
 );
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_tipo_servicio (
     PRIMARY KEY (sk_dim_tipo_servicio)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_medico (
+CREATE TABLE IF NOT EXISTS OLAP.dim_medico ( -- !READY
     sk_dim_medico integer NOT NULL,
     cedula numeric NOT NULL, -- * Natural Key
     cod_colegio_medico numeric NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_medico (
     id_estado_civil uuid NOT NULL,
     descripcion_estado_civil varchar NOT NULL,
     anos_experiencia integer NOT NULL,
-    id_area integer NOT NULL,
+    id_area integer NOT NULL,   
     CONSTRAINT "fk_area" FOREIGN KEY (id_area) REFERENCES OLAP.dim_area(sk_dim_area),
     PRIMARY KEY (sk_dim_medico)
 );
@@ -182,24 +182,23 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_intervencion (
     intervencion integer NOT NULL,
     fecha_practicada integer NOT NULL,
     riesgo integer NOT NULL,
-    area integer NOT NULL,
     personal_sanitario integer NOT NULL,
     gastos_equipos float NOT NULL,
     costo_intervecion float NOT NULL,
     honorario_equipo float NOT NULL,
     duracion float NOT NULL,
-    PRIMARY KEY (medico, paciente, intervencion, fecha_practicada, riesgo, area),
+    PRIMARY KEY (medico, paciente, intervencion, fecha_practicada, riesgo, personal_sanitario),
     CONSTRAINT "fk_medico" FOREIGN KEY (medico) REFERENCES OLAP.dim_medico(sk_dim_medico),
     CONSTRAINT "fk_paciente" FOREIGN KEY (paciente) REFERENCES OLAP.dim_paciente(sk_dim_paciente),
     CONSTRAINT "fk_intervencion" FOREIGN KEY (intervencion) REFERENCES OLAP.dim_intervencion(sk_dim_intervencion),
     CONSTRAINT "fk_fecha_practicada" FOREIGN KEY (fecha_practicada) REFERENCES OLAP.dim_tiempo(sk_dim_tiempo),
     CONSTRAINT "fk_riesgo" FOREIGN KEY (riesgo) REFERENCES OLAP.dim_riesgo(sk_dim_riesgo),
-    CONSTRAINT "fk_area" FOREIGN KEY (area) REFERENCES OLAP.dim_area(sk_dim_area),
     CONSTRAINT "fk_personal_sanitario" FOREIGN KEY (personal_sanitario) REFERENCES OLAP.dim_personal_sanit(sk_dim_personal_sanit)
 );
 
 -- TODO: Recordar preguntar porque el costo no ta en el fact y si agreamos el costo dosis diario en el fact
 CREATE TABLE IF NOT EXISTS OLAP.fact_tratamiento (
+    medicamento integer NOT NULL,
     tratamiento integer NOT NULL,
     fecha_inicio integer NOT NULL,
     fecha_fin integer NOT NULL,
@@ -207,8 +206,9 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_tratamiento (
     paciente integer NOT NULL,
     fecha_elaboracion_tratamiento integer NOT NULL,
     cant_dias integer NOT NULL,
-    num_ingreso integer NOT NULL,
-    PRIMARY KEY (tratamiento, fecha_inicio, fecha_fin, medico, paciente, fecha_elaboracion_tratamiento),
+    num_ingreso numeric NOT NULL,
+    PRIMARY KEY (medicamento, tratamiento, fecha_inicio, fecha_fin, medico, paciente, fecha_elaboracion_tratamiento),
+    CONSTRAINT "fk_medicamento" FOREIGN KEY (medicamento) REFERENCES OLAP.dim_medicamento(sk_dim_medicamento),
     CONSTRAINT "fk_tratamiento" FOREIGN KEY (tratamiento) REFERENCES OLAP.dim_tratamiento(sk_dim_tratamiento),
     CONSTRAINT "fk_fecha_inicio" FOREIGN KEY (fecha_inicio) REFERENCES OLAP.dim_tiempo(sk_dim_tiempo),
     CONSTRAINT "fk_fecha_fin" FOREIGN KEY (fecha_fin) REFERENCES OLAP.dim_tiempo(sk_dim_tiempo),
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_tratamiento (
 );
 
 -- TODO: Recordar preguntar porque el costo no ta en el fact
-CREATE TABLE IF NOT EXISTS OLAP.fact_diagnostico (
+CREATE TABLE IF NOT EXISTS OLAP.fact_diagnostico ( -- !READY
     medico integer NOT NULL,
     paciente integer NOT NULL,
     diagnostico integer NOT NULL,
