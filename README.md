@@ -1,7 +1,13 @@
 # Sana Salud
 
-## Descripción
-<!-- TODO xD-->
+## Description
+A comprehensive data warehouse solution designed to optimize and analyze healthcare operations at SanaSalud Hospital. This project focuses on improving the management and analysis of key medical processes. The system integrates data from multiple sources to provide actionable insights across ten medical specialties, including cardiology, surgery, and others.
+
+Our solution implements both OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) systems, featuring:
+- Robust ETL pipelines for data integration and cleansing
+- Interactive dashboards and reports built with PowerBI
+
+This project was developed as part of the Business Intelligence course at Universidad Católica Andrés Bello, under the guidance of Professor Concettina Di Vasta. It represents a practical application of BI concepts in healthcare management.
 
 ## Team Members
 - [**Alejandro Molina**](https://github.com/Alejo-FM)
@@ -26,4 +32,8 @@ npm run reset
 ## Technologies
 - PostgreSQL
 - PowerBI
+
+<p align="center">
+  <a href="https://www.joomla.org/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" width="200" height='150' alt="Joomla Logo" /></a>
+  <a href="https://mariadb.org/" target="blank"><img src="https://logodix.com/logo/1960166.png" width="200" height='150' alt="MariaDB Logo" /></a>
 
