@@ -18,9 +18,14 @@ git clone https://github.com/Alejo-FM/sanasalud-project.git
 npm start
 ```
 
-3. Execute the following command to reset the database
+3. Execute the following command to reset the database (delete all and create again) 
 ```bash
 npm run reset
+```
+
+4. Execute the following command to delete the container
+```bash
+npm run delete
 ```
 
 ## Technologies
