@@ -165,15 +165,63 @@ CREATE TABLE IF NOT EXISTS OLAP.puente_medicina_tratamiento ( -- !READY
     CONSTRAINT "fk_medicamento" FOREIGN KEY (medicamento) REFERENCES OLAP.dim_medicamento(sk_dim_medicamento),
     CONSTRAINT "fk_tratamiento" FOREIGN KEY (tratamiento) REFERENCES OLAP.dim_tratamiento(sk_dim_tratamiento)
 );
+
 -- TODO: Dimensión Historial medico ?
 
+CREATE TABLE IF NOT EXISTS OLAP.dim_historia_medica (
+    sk_dim_historia_medica integer NOT NULL,
+    nro_historia numeric NOT NULL,
+    cedula numeric NOT NULL,
+    fecha_actualizacion date NOT NULL,
+    peso_actual  float NOT NULL,
+    peso_ideal float NOT NULL,
+    tension varchar NOT NULL,
+    fumador boolean NOT NULL,
+    hipertenso boolean NOT NULL,
+    artitris boolean NOT NULL,
+    osteoporosis boolean NOT NULL,
+    diabetes boolean NOT NULL,
+    prob_respiratorio boolean NOT NULL,
+    PRIMARY KEY (sk_dim_historia_medica)
+);
+
 -- TODO: Dimensión estado_factura ?
+
+CREATE TABLE IF NOT EXISTS OLAP.dim_estado_factura (
+    sk_dim_estado_factura integer NOT NULL,
+    id_estado_factura uuid NOT NULL,
+    descripcion varchar NOT NULL,
+    PRIMARY KEY (sk_dim_estado_factura)
+);
 
 ---------------------------------------------------------------
 -- * Hechos:
 ---------------------------------------------------------------
 
 -- TODO: Hacer fact_facturacion
+
+CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
+    sk_dim_facturacion numeric NOT NULL,
+    medico integer NOT NULL,
+    paciente integer NOT NULL,
+    tipo_servicio integer NOT NULL,
+    fecha_emision integer NOT NULL,
+    fecha_culminacion integer NOT NULL,
+    estado_factura integer NOT NULL,
+    poliza integer NOT NULL,
+    area integer NOT NULL,
+    cobertura_poliza integer NOT NULL,
+    costo_servicio float NOT NULL,
+    impuesto float NOT NULL,
+    monto_total float NOT NULL,
+    PRIMARY KEY (sk_dim_facturacion),
+    CONSTRAINT "fk_medico" FOREIGN KEY (medico) REFERENCES OLAP.dim_medico(sk_dim_medico),
+    CONSTRAINT "fk_paciente" FOREIGN KEY (paciente) REFERENCES OLAP.dim_paciente(sk_dim_paciente),
+    CONSTRAINT "fk_tipo_servicio" FOREIGN KEY (tipo_servicio) REFERENCES OLAP.dim_tipo_servicio(sk_dim_tipo_servicio),
+    CONSTRAINT "fk_estado_factura" FOREIGN KEY (estado_factura) REFERENCES OLAP.dim_estado_factura(sk_dim_estado_factura),
+    CONSTRAINT "fk_poliza" FOREIGN KEY (poliza) REFERENCES OLAP.dim_poliza(sk_dim_poliza),
+    CONSTRAINT "fk_area" FOREIGN KEY (area) REFERENCES OLAP.dim_area(sk_dim_area)
+);
 
 -- TODO: Revisar este fact
 CREATE TABLE IF NOT EXISTS OLAP.fact_intervencion (
