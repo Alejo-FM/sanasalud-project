@@ -390,6 +390,17 @@ INSERT INTO Proveedor ("id_proveedor","nombre","rif","telefono","fax","direccion
 ('a03940e5-ecc9-5a75-881f-504e8b207382','American Bios Services C.A','J-410168471','0212-2666696','0212-2666696','Av. San Felipe, Torre Bancaracas, piso 8, Ofic. 803, Urbanización La Castellana, Caracas','6b9577cf-f181-565e-997e-5a6b1a949af7','89349ce9-6552-52f2-88b5-c2feaa47463a'),
 ('7cd3a6d0-d045-57c7-b406-57357f6da271','Centro Clínico La Urbina (Servicios Médicos Asis Med, C.A.)','J-002439912','0212-2413089','0212-2413089','Calle 6 con calle 7, Edif. Sassalca, La Urbina, Caracas.','87c995bf-de0d-539a-bb59-fa1b5546c3f4','89349ce9-6552-52f2-88b5-c2feaa47463a');
 
+INSERT INTO Tipo_Servicio ("id_tipo_servicio","descripcion") VALUES
+('76a97e6a-8bcc-509f-8c8c-3954f5936c7b','tratamiento'),
+('cf5c3af5-21a3-5ee1-b5e3-6497075ea42e','diagnostico'),
+('37ff1d6c-67fc-5743-b370-1220705bd0fd','intervencion');
+
+INSERT INTO Estado_Factura ("id_estado_factura","descripcion") VALUES
+('f2e6421f-13f6-5e5e-829c-0cd93b56939e','pendiente'),
+('2c82cc1a-9d72-5514-a01f-511c14aa3ece','vencida'),
+('7dd009ca-9161-5fdd-9cfd-ab8fd1617576','pagada');
+
+
 INSERT INTO Medicamento ("id_medicamento","nombre","presentacion","posologia","efectos_secundarios", "proveedor" ) VALUES
 
 -- Psiquiatría

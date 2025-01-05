@@ -161,17 +161,6 @@ CREATE TABLE IF NOT EXISTS Aplica (
     CONSTRAINT "fk_tratamiento" FOREIGN KEY (tratamiento) REFERENCES Tratamiento(id_tratamiento)
 );
 
-CREATE TABLE IF NOT EXISTS PRESCRIBE (
-    ci_medico numeric NOT NULL,
-    ci_paciente numeric NOT NULL,
-    tratamiento uuid NOT NULL,
-    numero_ingreso numeric NOT NULL,
-    fecha_elaboracion date NOT NULL,
-    PRIMARY KEY (ci_medico, ci_paciente, tratamiento),
-    CONSTRAINT "fk_medico" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
-    CONSTRAINT "fk_paciente" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
-    CONSTRAINT "fk_tratamiento_prescribe" FOREIGN KEY (tratamiento) REFERENCES Tratamiento(id_tratamiento)
-);
 
 CREATE TABLE IF NOT EXISTS Tiene (
     ci_medico numeric NOT NULL,
@@ -201,12 +190,27 @@ CREATE TABLE IF NOT EXISTS Practica (
     duracion numeric NOT NULL,
     gasto_equipos float NOT NULL,
     costo float NOT NULL,
+    costo_cubre float NULL,
     honorario_equipo float NOT NULL,
+    tipo_poliza CHAR(10) NOT NULL,
+    CONSTRAINT chk_tipo_poliza CHECK (LOWER(tipo_poliza) IN ('principal', 'secundaria')),
     PRIMARY KEY (ci_medico, ci_paciente, intervencion, personal_sanitario),
     CONSTRAINT "fk_medico_practica" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
     CONSTRAINT "fk_paciente_practica" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
     CONSTRAINT "fk_intervencion_practica" FOREIGN KEY (intervencion) REFERENCES Intervencion(id_intervencion),
     CONSTRAINT "fk_personal_sanitario_practica" FOREIGN KEY (personal_sanitario) REFERENCES Personal_Sanitario(ci_personal)
+);
+
+CREATE TABLE IF NOT EXISTS PRESCRIBE (
+    ci_medico numeric NOT NULL,
+    ci_paciente numeric NOT NULL,
+    tratamiento uuid NOT NULL,
+    numero_ingreso numeric NOT NULL,
+    fecha_elaboracion date NOT NULL,
+    PRIMARY KEY (ci_medico, ci_paciente, tratamiento),
+    CONSTRAINT "fk_medico" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
+    CONSTRAINT "fk_paciente" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
+    CONSTRAINT "fk_tratamiento_prescribe" FOREIGN KEY (tratamiento) REFERENCES Tratamiento(id_tratamiento)
 );
 
 CREATE TABLE IF NOT EXISTS Realiza (
@@ -229,7 +233,39 @@ CREATE TABLE IF NOT EXISTS Ocupa (
     dias_cubiertos_seguro numeric NOT NULL,
     costo_diario float NOT NULL,
     status varchar NOT NULL,
+    CONSTRAINT chk_status_ocupa CHECK (LOWER(status) IN ('ocupada', 'desocupada')),
     PRIMARY KEY (ci_paciente, numero_cama),
     CONSTRAINT "fk_paciente_ocupa" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
     CONSTRAINT "fk_cama_ocupa" FOREIGN KEY (numero_cama) REFERENCES Cama(numero_cama)
+);
+
+CREATE TABLE IF NOT EXISTS Tipo_Servicio (
+    id_tipo_servicio uuid NOT NULL DEFAULT gen_random_uuid(),
+    descripcion varchar NOT NULL,
+    PRIMARY KEY (id_tipo_servicio)
+);
+
+CREATE TABLE IF NOT EXISTS Estado_Factura (
+    id_estado_factura uuid NOT NULL DEFAULT gen_random_uuid(),
+    descripcion varchar NOT NULL,
+    PRIMARY KEY (id_estado_factura)
+);
+
+CREATE TABLE IF NOT EXISTS Factura (
+    ci_paciente numeric NOT NULL,
+    area uuid NOT NULL,
+    numero_cama numeric NULL,
+    tipo_servicio uuid NOT NULL,
+    estado_factura uuid NOT NULL,
+    fecha_emision date NOT NULL,
+    fecha_vencimiento date NOT NULL,
+    fecha_pago date NULL,
+    dias_cubiertos_seguro numeric NULL,
+    costo_servicio float NOT NULL,
+    impuesto float NOT NULL,
+    PRIMARY KEY (ci_paciente, fecha_emision, fecha_vencimiento),
+    CONSTRAINT "fk_paciente" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
+    CONSTRAINT "fk_cama_ocupa" FOREIGN KEY (numero_cama) REFERENCES Cama(numero_cama),
+    CONSTRAINT "fk_tipo_servicio" FOREIGN KEY (tipo_servicio) REFERENCES Tipo_Servicio(id_tipo_servicio),
+    CONSTRAINT "fk_estado_factura" FOREIGN KEY (estado_factura) REFERENCES Estado_Factura(id_estado_factura)
 );
