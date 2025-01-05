@@ -11,6 +11,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./OLTP/database.sql:/docker-entrypoint-initdb.d/create_database.sql
+      - ./OLTP/triggers.sql:/docker-entrypoint-initdb.d/triggers.sql
       - ./OLTP/seed.sql:/docker-entrypoint-initdb.d/seed.sql
       - ./OLAP/database.sql:/docker-entrypoint-initdb.d/create_datamart.sql
 
