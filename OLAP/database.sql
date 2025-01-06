@@ -133,6 +133,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_medico ( -- !READY
 
 CREATE TABLE IF NOT EXISTS OLAP.dim_poliza (
     sk_dim_poliza integer NOT NULL,
+    nro_poliza numeric NOT NULL,
     empresa varchar NOT NULL,
     tipo_poliza varchar NOT NULL,
     hospitalizacion boolean NOT NULL,
@@ -166,6 +167,16 @@ CREATE TABLE IF NOT EXISTS OLAP.puente_medicina_tratamiento ( -- !READY
     CONSTRAINT "fk_tratamiento" FOREIGN KEY (tratamiento) REFERENCES OLAP.dim_tratamiento(sk_dim_tratamiento)
 );
 
+CREATE TABLE IF NOT EXISTS OLAP.dim_registro_epidemiologico (
+    sk_dim_registro_epidemiologico integer NOT NULL,
+    estado varchar(25) NOT NULL,
+    cantidad_hab numeric NOT NULL,
+    enfermedad varchar(25) NOT NULL,
+    cant_casos numeric NOT NULL,
+    situacion_actual varchar(15) NOT NULL,
+    PRIMARY KEY (sk_dim_registro_epidemiologico)
+);
+
 -- TODO: Dimensión Historial medico ?
 
 CREATE TABLE IF NOT EXISTS OLAP.dim_historia_medica (
@@ -177,10 +188,6 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_historia_medica (
     peso_ideal float NOT NULL,
     tension varchar NOT NULL,
     fumador boolean NOT NULL,
-    hipertenso boolean NOT NULL,
-    artitris boolean NOT NULL,
-    osteoporosis boolean NOT NULL,
-    diabetes boolean NOT NULL,
     prob_respiratorio boolean NOT NULL,
     PRIMARY KEY (sk_dim_historia_medica)
 );
@@ -210,7 +217,8 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
     estado_factura integer NOT NULL,
     poliza integer NOT NULL,
     area integer NOT NULL,
-    cobertura_poliza integer NOT NULL,
+    cobertura_poliza_dias integer NULL,
+    numero_cama numeric NULL,
     costo_servicio float NOT NULL,
     impuesto float NOT NULL,
     monto_total float NOT NULL,

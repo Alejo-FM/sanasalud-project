@@ -178,6 +178,7 @@ BEGIN
         numero_cama,
         tipo_servicio,
         estado_factura,
+        nro_poliza,
         fecha_emision,
         fecha_vencimiento,
         fecha_pago,
@@ -207,6 +208,7 @@ BEGIN
             WHERE LOWER(descripcion) = LOWER('PENDIENTE') 
             LIMIT 1
         ),
+        NEW.nro_poliza,
         NEW.fecha,
         NEW.fecha + INTERVAL '7 days',
         NULL,
