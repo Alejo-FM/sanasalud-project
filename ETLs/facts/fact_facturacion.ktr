@@ -513,8 +513,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Diagnostico</from>
-      <to>Diagnostico lookup</to>
+      <from>Dim Historia Medica</from>
+      <to>Historia Medica lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -523,7 +523,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Diagnostico lookup</from>
+      <from>Historia Medica lookup</from>
       <to>Tiempo lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -534,7 +534,7 @@
     </hop>
     <hop>
       <from>Tipo Servicio lookup</from>
-      <to>Diagnostico lookup</to>
+      <to>Historia Medica lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -584,11 +584,16 @@
     </hop>
     <hop>
       <from>Area lookup</from>
-      <to>Calculadora</to>
+      <to>Calculadora monto total</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Calculadora</from>
+      <from>Calculadora monto total</from>
+      <to>Calculadora cant dias</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Calculadora cant dias</from>
       <to>Insert / update Facturacion</to>
       <enabled>Y</enabled>
     </hop>
@@ -636,7 +641,7 @@
     </GUI>
   </step>
   <step>
-    <name>Calculadora</name>
+    <name>Calculadora monto total</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -677,7 +682,7 @@
     </GUI>
   </step>
   <step>
-    <name>Diagnostico lookup</name>
+    <name>Historia Medica lookup</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -687,19 +692,19 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Diagnostico</from>
+    <from>Dim Historia Medica</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>id_diagnostico</name>
-        <field>id_diagnostico</field>
+        <name>cedula</name>
+        <field>cedula</field>
       </key>
       <value>
-        <name>sk_dim_diagnostico</name>
-        <rename>diagnostico</rename>
+        <name>sk_dim_historia_medica</name>
+        <rename>sk_dim_historia_medica</rename>
         <default/>
         <type>Integer</type>
       </value>
@@ -803,7 +808,7 @@ FROM olap.dim_area</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Diagnostico</name>
+    <name>Dim Historia Medica</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -815,9 +820,9 @@ FROM olap.dim_area</sql>
     </partitioning>
     <connection>SanaSalud-db</connection>
     <sql>SELECT
-	sk_dim_diagnostico,
-	id_diagnostico
-FROM olap.dim_diagnostico</sql>
+	sk_dim_historia_medica,
+	cedula
+FROM olap.dim_historia_medica</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -828,14 +833,14 @@ FROM olap.dim_diagnostico</sql>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>sk_dim_diagnostico</name>
+        <name>sk_dim_historia_medica</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input 3</origin>
-        <comments>sk_dim_diagnostico</comments>
+        <origin>Dim Historia Medica</origin>
+        <comments>sk_dim_historia_medica</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -844,21 +849,21 @@ FROM olap.dim_diagnostico</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_MX</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>BigNumber</type>
         <storagetype>normal</storagetype>
-        <name>id_diagnostico</name>
+        <name>cedula</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input 3</origin>
-        <comments>id_diagnostico</comments>
-        <conversion_Mask/>
+        <origin>Dim Historia Medica</origin>
+        <comments>cedula</comments>
+        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
+        <grouping_symbol/>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -867,7 +872,7 @@ FROM olap.dim_diagnostico</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_MX</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1859,7 +1864,7 @@ FROM Factura</sql>
       <table>fact_facturacion</table>
       <key>
         <name>ci_paciente</name>
-        <field>ci_paciente</field>
+        <field>paciente</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -1908,6 +1913,12 @@ FROM Factura</sql>
       <key>
         <name>numero_cama</name>
         <field>numero_cama</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_dim_historia_medica</name>
+        <field>historia_medica</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -1981,6 +1992,16 @@ FROM Factura</sql>
         <rename>dias_cubiertos_seguro</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>cant_dias</name>
+        <rename>cant_dias</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>historia_medica</name>
+        <rename>sk_dim_historia_medica</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -1991,7 +2012,7 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
+      <xloc>1760</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2244,6 +2265,47 @@ FROM Factura</sql>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculadora cant dias</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>cant_dias</field_name>
+      <calc_type>ADD</calc_type>
+      <field_a>dim_tiempo_pago</field_a>
+      <field_b>fecha_emision</field_b>
+      <field_c/>
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1616</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
