@@ -251,7 +251,9 @@ CREATE TABLE IF NOT EXISTS Estado_Factura (
 );
 
 CREATE TABLE IF NOT EXISTS Factura (
+    id_factura uuid NOT NULL DEFAULT gen_random_uuid(),
     ci_paciente numeric NOT NULL,
+    ci_medico numeric NOT NULL,
     area uuid NOT NULL,
     numero_cama numeric NULL,
     tipo_servicio uuid NOT NULL,
@@ -263,8 +265,10 @@ CREATE TABLE IF NOT EXISTS Factura (
     dias_cubiertos_seguro numeric NULL,
     costo_servicio float NOT NULL,
     impuesto float NOT NULL,
-    PRIMARY KEY (ci_paciente, fecha_emision, fecha_vencimiento),
+    PRIMARY KEY (id_factura),
     CONSTRAINT "fk_paciente" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),
+    CONSTRAINT "fk_medico" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
+    CONSTRAINT "fk_area" FOREIGN KEY (area) REFERENCES Area(id_area),
     CONSTRAINT "fk_cama_ocupa" FOREIGN KEY (numero_cama) REFERENCES Cama(numero_cama),
     CONSTRAINT "fk_tipo_servicio" FOREIGN KEY (tipo_servicio) REFERENCES Tipo_Servicio(id_tipo_servicio),
     CONSTRAINT "fk_estado_factura" FOREIGN KEY (estado_factura) REFERENCES Estado_Factura(id_estado_factura)

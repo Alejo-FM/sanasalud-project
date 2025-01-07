@@ -1307,7 +1307,7 @@ FROM olap.dim_registro_epidemiologico
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>
-  var max_sk = max_sk || SECUENCIA_FS;
+  var max_sk = max_sk || 0;
   var sk_dim_registro_epidemiologico = max_sk + SECUENCIA_FS;
 </jsScript_script>
       </jsScript>

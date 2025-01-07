@@ -595,7 +595,7 @@ FROM olap.dim_tipo_servicio
         <storagetype>normal</storagetype>
         <name>id_tipo_servicio</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Dim_estado_factura</origin>
         <comments>id_tipo_servicio</comments>
         <conversion_Mask/>
@@ -625,41 +625,6 @@ FROM olap.dim_tipo_servicio
     <GUI>
       <xloc>320</xloc>
       <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Tipo_Servicio</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SanaSalud-db</connection>
-    <rowlimit>0</rowlimit>
-    <sql>SELECT 
-	t.id_tipo_servicio,
-	t.descripcion
-FROM Tipo_Servicio t</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-    </parameter>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>224</xloc>
-      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -973,6 +938,41 @@ FROM olap.dim_tipo_servicio
     </GUI>
   </step>
   <step>
+    <name>Tipo_Servicio</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>SanaSalud-db</connection>
+    <rowlimit>0</rowlimit>
+    <sql>SELECT 
+	t.id_tipo_servicio,
+	t.descripcion
+FROM Tipo_Servicio t</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+    </parameter>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Valor JavaScript modificado</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -990,7 +990,7 @@ FROM olap.dim_tipo_servicio
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>
-  var max_sk = max_sk || SECUENCIA_FS;
+  var max_sk = max_sk || 0;
   var sk_dim_tipo_servicio = max_sk + SECUENCIA_FS;
 </jsScript_script>
       </jsScript>

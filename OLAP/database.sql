@@ -208,7 +208,8 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_estado_factura (
 -- TODO: Hacer fact_facturacion
 
 CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
-    sk_dim_facturacion numeric NOT NULL,
+    sk_dim_facturacion integer NOT NULL,
+    id_factura uuid NOT NULL,
     medico integer NOT NULL,
     paciente integer NOT NULL,
     tipo_servicio integer NOT NULL,
