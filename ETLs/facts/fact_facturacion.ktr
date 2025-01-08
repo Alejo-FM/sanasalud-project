@@ -593,52 +593,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter Nulls</from>
-      <to>SECUENCIA</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SECUENCIA</from>
-      <to>Valor JavaScript modificado</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SK Lookup</from>
-      <to>Filter Not Nulls</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>SK Lookup</from>
-      <to>Filter Nulls</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Valor JavaScript modificado</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Calculadora cant dias</from>
-      <to>SK Lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Max SK</from>
-      <to>Fact Facturacion</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Fact Facturacion</from>
-      <to>SK Lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter Not Nulls</from>
-      <to>Insert / update Facturacion</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values</from>
       <to>Insert / update Facturacion</to>
       <enabled>Y</enabled>
     </hop>
@@ -1490,7 +1445,7 @@ FROM olap.dim_tipo_servicio</sql>
         <storagetype>normal</storagetype>
         <name>id_tipo_servicio</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Dim Tipo Servicio</origin>
         <comments>id_tipo_servicio</comments>
         <conversion_Mask/>
@@ -1605,7 +1560,7 @@ FROM Factura</sql>
         <storagetype>normal</storagetype>
         <name>id_factura</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Factura</origin>
         <comments>id_factura</comments>
         <conversion_Mask/>
@@ -1674,7 +1629,7 @@ FROM Factura</sql>
         <storagetype>normal</storagetype>
         <name>area</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Factura</origin>
         <comments>area</comments>
         <conversion_Mask/>
@@ -1720,7 +1675,7 @@ FROM Factura</sql>
         <storagetype>normal</storagetype>
         <name>tipo_servicio</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Factura</origin>
         <comments>tipo_servicio</comments>
         <conversion_Mask/>
@@ -1743,7 +1698,7 @@ FROM Factura</sql>
         <storagetype>normal</storagetype>
         <name>estado_factura</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Factura</origin>
         <comments>estado_factura</comments>
         <conversion_Mask/>
@@ -2003,11 +1958,6 @@ FROM Factura</sql>
         <name2/>
       </key>
       <value>
-        <name>id_factura</name>
-        <rename>id_factura</rename>
-        <update>N</update>
-      </value>
-      <value>
         <name>paciente</name>
         <rename>paciente</rename>
         <update>Y</update>
@@ -2078,8 +2028,8 @@ FROM Factura</sql>
         <update>Y</update>
       </value>
       <value>
-        <name>sk_dim_facturacion</name>
-        <rename>sk_dim_facturacion</rename>
+        <name>id_factura</name>
+        <rename>id_factura</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -2092,8 +2042,8 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2352</xloc>
-      <yloc>368</yloc>
+      <xloc>1744</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2346,416 +2296,6 @@ FROM Factura</sql>
     <GUI>
       <xloc>528</xloc>
       <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter Not Nulls</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to/>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>sk_dim_facturacion</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1712</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter Nulls</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to/>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>sk_dim_facturacion</leftvalue>
-        <function>IS NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1840</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SECUENCIA</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>SECUENCIA_FS</valuename>
-    <use_database>N</use_database>
-    <connection>SanaSalud-db</connection>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>2016</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>SK Lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Fact Facturacion</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>id_factura</name>
-        <field>id_factura</field>
-      </key>
-      <value>
-        <name>sk_dim_facturacion</name>
-        <rename>sk_dim_facturacion</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1712</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <remove>
-        <name>SECUENCIA_FS</name>
-      </remove>
-      <meta>
-        <name>sk_dim_facturacion</name>
-        <rename>sk_dim_facturacion</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>2352</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Valor JavaScript modificado</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>
-  var max_sk = max_sk || 0;
-  var sk_dim_facturacion = max_sk + SECUENCIA_FS;
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>sk_dim_facturacion</name>
-        <rename>sk_dim_facturacion</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>Y</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>2160</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Fact Facturacion</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SanaSalud-db</connection>
-    <sql>SELECT
-  sk_dim_facturacion
-, id_factura
-FROM olap.fact_facturacion
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>max_sk</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Max SK</origin>
-        <comments>max_sk</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>sk_dim_facturacion</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Fact Facturacion</origin>
-        <comments>sk_dim_facturacion</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>id_factura</name>
-        <length>-1</length>
-        <precision>0</precision>
-        <origin>Fact Facturacion</origin>
-        <comments>id_factura</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1712</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Max SK</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SanaSalud-db</connection>
-    <sql>SELECT 
-   MAX(sk_dim_facturacion) as max_sk
-FROM olap.fact_facturacion</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>BigNumber</type>
-        <storagetype>normal</storagetype>
-        <name>max_sk</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Max SK</origin>
-        <comments>max_sk</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1840</xloc>
-      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
