@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_estado_factura (
 -- TODO: Hacer fact_facturacion
 
 CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
-    sk_dim_facturacion numeric NOT NULL,
+    id_factura uuid NOT NULL,
     medico integer NOT NULL,
     paciente integer NOT NULL,
     tipo_servicio integer NOT NULL,
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
     costo_servicio float NOT NULL,
     impuesto float NOT NULL,
     monto_total float NOT NULL,
-    PRIMARY KEY (sk_dim_facturacion),
+    PRIMARY KEY (id_factura),
     CONSTRAINT "fk_medico" FOREIGN KEY (medico) REFERENCES OLAP.dim_medico(sk_dim_medico),
     CONSTRAINT "fk_paciente" FOREIGN KEY (paciente) REFERENCES OLAP.dim_paciente(sk_dim_paciente),
     CONSTRAINT "fk_tipo_servicio" FOREIGN KEY (tipo_servicio) REFERENCES OLAP.dim_tipo_servicio(sk_dim_tipo_servicio),

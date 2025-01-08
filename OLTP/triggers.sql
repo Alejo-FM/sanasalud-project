@@ -7,6 +7,7 @@ RETURNS TRIGGER AS $$
 BEGIN
     INSERT INTO Factura (
         ci_paciente,
+        ci_medico,
         area,
         numero_cama,
         tipo_servicio,
@@ -20,6 +21,7 @@ BEGIN
     )
     VALUES (
         NEW.ci_paciente,
+        NEW.ci_medico,
         (
             SELECT id_area 
             FROM Trabaja t
@@ -57,6 +59,7 @@ RETURNS TRIGGER AS $$
 BEGIN
     INSERT INTO Factura (
         ci_paciente,
+        ci_medico,
         area,
         numero_cama,
         tipo_servicio,
@@ -70,6 +73,7 @@ BEGIN
     )
     VALUES (
         NEW.ci_paciente,
+        NEW.ci_medico,
         (
             SELECT id_area 
             FROM Trabaja t
@@ -174,6 +178,7 @@ BEGIN
 
     INSERT INTO Factura (
         ci_paciente,
+        ci_medico,
         area,
         numero_cama,
         tipo_servicio,
@@ -188,6 +193,7 @@ BEGIN
     )
     VALUES (
         NEW.ci_paciente,
+        NEW.ci_medico,
         (
             SELECT id_area 
             FROM Trabaja t

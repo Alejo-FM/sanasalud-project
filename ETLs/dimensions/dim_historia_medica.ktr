@@ -498,11 +498,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>SECUENCIA</from>
-      <to>Valor JavaScript modificado</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>SK Lookup</from>
       <to>Filter Not Nulls</to>
       <enabled>Y</enabled>
@@ -515,7 +510,7 @@
     <hop>
       <from>Select values</from>
       <to>Insert / update historia_medica</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Dim_historia_medica</from>
@@ -540,6 +535,11 @@
     <hop>
       <from>CSV file input</from>
       <to>SK Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SECUENCIA</from>
+      <to>Valor JavaScript modificado</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1192,8 +1192,8 @@ FROM olap.dim_historia_medica
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>
-  var max_sk = max_sk || SECUENCIA_FS;
-  var sk_dim_historia_medica = max_sk + SECUENCIA_FS;
+  var max_sk = max_sk || 0;
+  var sk_dim_historia_medica = max_sk + 1;
 </jsScript_script>
       </jsScript>
     </jsScripts>

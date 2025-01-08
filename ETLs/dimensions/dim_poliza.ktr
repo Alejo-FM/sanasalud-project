@@ -566,7 +566,7 @@
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
-    <format>mixed</format>
+    <format>DOS</format>
     <encoding/>
     <fields>
       <field>
@@ -722,8 +722,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>74</xloc>
-      <yloc>178</yloc>
+      <xloc>64</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1207,7 +1207,7 @@ FROM olap.dim_poliza
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>
-  var max_sk = max_sk || SECUENCIA_FS;
+  var max_sk = max_sk || 0;
   var sk_dim_poliza = max_sk + SECUENCIA_FS;
 </jsScript_script>
       </jsScript>
@@ -1231,8 +1231,8 @@ FROM olap.dim_poliza
       </output>
     </remotesteps>
     <GUI>
-      <xloc>746</xloc>
-      <yloc>178</yloc>
+      <xloc>736</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
