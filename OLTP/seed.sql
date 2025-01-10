@@ -528,6 +528,50 @@ INSERT INTO Cama ("numero_cama","area_hospital") VALUES
 (1003,'b704034e-99f7-5b55-89df-22a5fafb777b'),
 (1004,'b704034e-99f7-5b55-89df-22a5fafb777b');
 
+INSERT INTO Poliza (nro_poliza, ci_paciente, empresa, titular, tipo_poliza, hospitalizacion, cirugia, maternidad, radiografias, examenes, ambulancia, cobertura, aprobada) VALUES
+(1001, 16428665, 'Seguros Caracas', true, 'principal', true, true, false, true, true, true, 10000.00, true),
+(1002, 19099695, 'Seguros La Previsora', true, 'principal', true, true, true, true, true, true, 15000.00, true),
+(1003, 7046720, 'Seguros Mercantil', true, 'principal', true, true, false, true, true, false, 8000.00, true),
+(1004, 16612540, 'Seguros Caracas', true, 'principal', true, true, true, true, true, true, 12000.00, true),
+(1005, 17023670, 'Seguros La Previsora', true, 'principal', true, true, false, true, true, true, 9000.00, true),
+(1006, 16678412, 'Seguros Mercantil', true, 'principal', true, true, true, true, true, false, 11000.00, true),
+(1007, 7181920, 'Seguros Caracas', true, 'principal', true, true, false, true, true, true, 10000.00, true),
+(1008, 18789012, 'Seguros La Previsora', true, 'principal', true, true, true, true, true, true, 15000.00, true),
+(1009, 18901234, 'Seguros Mercantil', true, 'principal', true, true, false, true, true, false, 8000.00, true),
+(1010, 15012345, 'Seguros Caracas', true, 'principal', true, true, true, true, true, true, 12000.00, true),
+(1011, 17404058, 'Seguros La Previsora', true, 'principal', true, true, false, true, true, true, 9000.00, true),
+(1012, 16111456, 'Seguros Mercantil', true, 'principal', true, true, true, true, true, false, 11000.00, true),
+(1013, 19345678, 'Seguros Caracas', true, 'principal', true, true, false, true, true, true, 10000.00, true),
+(1014, 20345678, 'Seguros La Previsora', true, 'principal', true, true, true, true, true, true, 15000.00, true),
+(1015, 12678901, 'Seguros Mercantil', true, 'principal', true, true, false, true, true, false, 8000.00, true),
+(1016, 26456789, 'Seguros Caracas', true, 'principal', true, true, true, true, true, true, 12000.00, true),
+(1017, 20567890, 'Seguros La Previsora', true, 'principal', true, true, false, true, true, true, 9000.00, true),
+(1018, 23789012, 'Seguros Mercantil', true, 'principal', true, true, true, true, true, false, 11000.00, true),
+(1019, 25901234, 'Seguros Caracas', true, 'principal', true, true, false, true, true, true, 10000.00, true),
+(1020, 20890123, 'Seguros La Previsora', true, 'principal', true, true, true, true, true, true, 15000.00, true),
+(1021, 26012345, 'Seguros Mercantil', true, 'principal', true, true, false, true, true, false, 8000.00, true),
+(1022, 27678902, 'Seguros Caracas', true, 'principal', true, true, true, true, true, true, 12000.00, true),
+(1023, 26890124, 'Seguros La Previsora', true, 'principal', true, true, false, true, true, true, 9000.00, true),
+(1024, 24789013, 'Seguros Mercantil', true, 'principal', true, true, true, true, true, false, 11000.00, true),
+(1025, 19901235, 'Seguros Caracas', true, 'principal', true, true, false, true, true, true, 10000.00, true),
+(1026, 28123457, 'Seguros La Previsora', true, 'principal', true, true, true, true, true, true, 15000.00, true),
+(1027, 30123465, 'Seguros Mercantil', true, 'principal', true, true, false, true, true, false, 8000.00, true),
+(1028, 29234568, 'Seguros Caracas', true, 'principal', true, true, true, true, true, true, 12000.00, true),
+(1029, 29586555, 'Seguros La Previsora', true, 'principal', true, true, false, true, true, true, 9000.00, true),
+(1030, 27224935, 'Seguros Mercantil', true, 'principal', true, true, true, true, true, false, 11000.00, true),
+(1031, 16428665, 'Seguros Caracas', false, 'secundaria', true, true, false, true, true, true, 5000.00, true),
+(1032, 19099695, 'Seguros La Previsora', false, 'secundaria', true, true, true, true, true, true, 7500.00, true),
+(1033, 7046720, 'Seguros Mercantil', false, 'secundaria', true, true, false, true, true, false, 4000.00, true),
+(1034, 16612540, 'Seguros Caracas', false, 'secundaria', true, true, true, true, true, true, 6000.00, true),
+(1035, 17023670, 'Seguros La Previsora', false, 'secundaria', true, true, false, true, true, true, 4500.00, true),
+(1036, 16678412, 'Seguros Mercantil', false, 'secundaria', true, true, true, true, true, false, 5500.00, true),
+(1037, 7181920, 'Seguros Caracas', false, 'secundaria', true, true, false, true, true, true, 5000.00, true),
+(1038, 18789012, 'Seguros La Previsora', false, 'secundaria', true, true, true, true, true, true, 7500.00, true),
+(1039, 18901234, 'Seguros Mercantil', false, 'secundaria', true, true, false, true, true, false, 4000.00, true),
+(1040, 15012345, 'Seguros Caracas', false, 'secundaria', true, true, true, true, true, true, 6000.00, true);
+
+
+
 INSERT INTO Realiza ( "ci_medico","ci_paciente","diagnostico", "numero_ingreso","fecha_elaboracion") VALUES
 -- Cardiología
 (12647863, 16428665, '84a9c401-ac17-50d2-a52e-15cb86d86344', 1234567890, '2021-03-15'),
