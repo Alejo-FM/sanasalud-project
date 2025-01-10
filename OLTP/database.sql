@@ -191,8 +191,6 @@ CREATE TABLE IF NOT EXISTS Practica (
     gasto_equipos float NOT NULL,
     costo float NOT NULL,
     honorario_equipo float NOT NULL,
-    costo_cubre float NULL,
-    nro_poliza numeric NULL,
     PRIMARY KEY (ci_medico, ci_paciente, intervencion, personal_sanitario, fecha),
     CONSTRAINT "fk_medico_practica" FOREIGN KEY (ci_medico) REFERENCES Medico(cedula),
     CONSTRAINT "fk_paciente_practica" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula),

@@ -654,8 +654,8 @@
     <failIfNoFile>Y</failIfNoFile>
     <calculation>
       <field_name>cant_dias</field_name>
-      <calc_type>ADD</calc_type>
-      <field_a>dim_tiempo_pago</field_a>
+      <calc_type>DATE_DIFF</calc_type>
+      <field_a>fecha_pago</field_a>
       <field_b>fecha_emision</field_b>
       <field_c/>
       <value_type>None</value_type>
