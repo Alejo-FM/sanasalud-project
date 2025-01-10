@@ -273,3 +273,22 @@ CREATE TABLE IF NOT EXISTS Factura (
     CONSTRAINT "fk_tipo_servicio" FOREIGN KEY (tipo_servicio) REFERENCES Tipo_Servicio(id_tipo_servicio),
     CONSTRAINT "fk_estado_factura" FOREIGN KEY (estado_factura) REFERENCES Estado_Factura(id_estado_factura)
 );
+
+CREATE TABLE IF NOT EXISTS Poliza(
+    nro_poliza numeric NOT NULL,
+    ci_paciente numeric NOT NULL,
+    empresa varchar NOT NULL,
+    titular boolean NOT NULL,
+    tipo_poliza varchar NOT NULL,
+    hospitalizacion boolean NOT NULL,
+    cirugia boolean NOT NULL,
+    maternidad boolean NOT NULL,
+    radiografias boolean NOT NULL,
+    examenes boolean NOT NULL,
+    ambulancia boolean NOT NULL,
+    cobertura float NOT NULL,
+    aprobada boolean NOT NULL,
+    CONSTRAINT chk_tipo_poliza CHECK (LOWER(tipo_poliza) IN ('principal', 'secundaria')),
+    PRIMARY KEY (nro_poliza, ci_paciente),
+    CONSTRAINT "fk_paciente_poliza" FOREIGN KEY (ci_paciente) REFERENCES Paciente(cedula)
+);
