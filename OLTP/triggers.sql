@@ -43,7 +43,7 @@ BEGIN
             LIMIT 1
         ),
         NEW.fecha_elaboracion,
-        NEW.fecha_elaboracion + INTERVAL '7 days',
+        NEW.fecha_elaboracion + INTERVAL '30 days',
         NULL,
         NULL,
         (SELECT costo FROM Diagnostico WHERE id_diagnostico = NEW.diagnostico),
@@ -95,7 +95,7 @@ BEGIN
             LIMIT 1
         ),
         NEW.fecha_elaboracion,
-        NEW.fecha_elaboracion + INTERVAL '7 days',
+        NEW.fecha_elaboracion + INTERVAL '30 days',
         NULL,
         NULL,
         (SELECT costo FROM Tratamiento WHERE id_tratamiento = NEW.tratamiento),
@@ -141,16 +141,49 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION getPoliza( cedula_paciente numeric ) 
+RETURNS numeric AS $$
+DECLARE
+    n_poliza numeric; 
+BEGIN
+        SELECT p.nro_poliza INTO n_poliza
+        FROM Poliza p
+        WHERE p.ci_paciente = cedula_paciente
+        LIMIT 1;
+    
+    RETURN n_poliza;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION getCoberturaPoliza( cedula_paciente numeric, numero_poliza numeric ) 
+RETURNS numeric AS $$
+DECLARE
+    cobertura_poliza float; 
+BEGIN
+        SELECT p.cobertura INTO cobertura_poliza
+        FROM Poliza p
+        WHERE p.ci_paciente = cedula_paciente AND p.nro_poliza = numero_poliza
+        LIMIT 1;
+    
+    RETURN cobertura_poliza;
+END;
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE FUNCTION insert_after_practica()
 RETURNS TRIGGER AS $$
 DECLARE
     cama_desocupada numeric;
     cama_disponible numeric;
     num_cama numeric;
+    costo_cubre float;
+    cant_dias numeric;
 BEGIN
     
     SELECT getCamaDisponibleById(NEW.ci_medico) INTO cama_disponible; 
     SELECT getCamaDesocupadaById(NEW.ci_medico) INTO cama_desocupada; 
+    SELECT floor(random() * 4 + 1) INTO cant_dias; 
+    SELECT getCoberturaPoliza(NEW.ci_paciente, getPoliza(NEW.ci_paciente)) INTO costo_cubre; 
     
     IF cama_desocupada IS NOT NULL THEN 
         num_cama := cama_desocupada; 
@@ -165,15 +198,22 @@ BEGIN
     fecha_inicio,
     cantidad_dias,
     dias_cubiertos_seguro,
-    costo_diario
+    costo_diario,
+    status
     ) VALUES
     (
         NEW.ci_paciente,
         num_cama,
         NEW.fecha,
-        NEW.duracion,
-        ROUND(NEW.costo_cubre / (NEW.costo / NEW.duracion)),
-        (NEW.costo / NEW.duracion)
+        cant_dias,
+        ROUND(costo_cubre / (NEW.costo / cant_dias)),
+        (NEW.costo / cant_dias),
+         
+            CASE 
+                WHEN (NEW.fecha + interval '1 day' * cant_dias) < CURRENT_DATE 
+                    THEN LOWER('desocupada')
+                ELSE LOWER('ocupada')
+            END
     );
 
     INSERT INTO Factura (
@@ -197,7 +237,7 @@ BEGIN
         (
             SELECT id_area 
             FROM Trabaja t
-            WHERE t.ci_medico = NEW.ci_medico AND t.fecha <= NEW.fecha_elaboracion
+            WHERE t.ci_medico = NEW.ci_medico AND t.fecha <= NEW.fecha
             ORDER BY t.fecha DESC
   			LIMIT 1
         ),
@@ -214,11 +254,11 @@ BEGIN
             WHERE LOWER(descripcion) = LOWER('PENDIENTE') 
             LIMIT 1
         ),
-        NEW.nro_poliza,
+        getPoliza(NEW.ci_paciente),
         NEW.fecha,
-        NEW.fecha + INTERVAL '7 days',
+        NEW.fecha + INTERVAL '30 days',
         NULL,
-        ROUND(NEW.costo_cubre / (NEW.costo / NEW.duracion)),
+        ROUND(costo_cubre / (NEW.costo / cant_dias)),
         NEW.costo,
         NEW.costo * 0.12
     );
@@ -269,3 +309,19 @@ CREATE TRIGGER trigger_insert_factura_before_practica
 BEFORE INSERT ON Practica
 FOR EACH ROW
 EXECUTE FUNCTION insert_before_practica();
+
+---------------------------------------------------------------
+-- * Procedimientos
+---------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE actualizar_facturas()
+AS $$
+BEGIN
+
+    UPDATE Factura
+    SET estado_factura = (SELECT id_estado_factura FROM Estado_Factura WHERE LOWER(descripcion) = LOWER('pagada')),
+        fecha_pago = fecha_emision + INTERVAL '1 days' * floor(random() * 4 + 1)  
+    WHERE fecha_vencimiento < CURRENT_DATE AND fecha_pago IS NULL;
+
+END;
+$$ LANGUAGE plpgsql;

@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
     historia_medica integer NULL,
     cobertura_poliza_dias integer NULL,
     numero_cama numeric NULL,
-    cant_dias numeric NULL,
+    cant_dias integer NULL,
     costo_servicio float NOT NULL,
     impuesto float NOT NULL,
     monto_total float NOT NULL,

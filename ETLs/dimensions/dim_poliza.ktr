@@ -493,11 +493,6 @@
   </connection>
   <order>
     <hop>
-      <from>CSV file input</from>
-      <to>SK Lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Filter Not Nulls</from>
       <to>Insert / update poliza</to>
       <enabled>Y</enabled>
@@ -528,11 +523,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Max SK</from>
-      <to>Dim_poliza</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Valor JavaScript modificado</from>
       <to>Select values</to>
       <enabled>Y</enabled>
@@ -542,191 +532,17 @@
       <to>SECUENCIA</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Poliza</from>
+      <to>SK Lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Max SK</from>
+      <to>Poliza</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>${BI_PATH}\ETLs\files\POLIZAS_DE_SEGUROS.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>DOS</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>NRO_POLIZA</name>
-        <type>BigNumber</type>
-        <format>#</format>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CEDULA</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EMPRESA</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>12</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>TITULAR</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>TIPO_POLIZA</name>
-        <type>String</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>10</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>HOSPITALIZACION</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CIRUGIA</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>MATERNIDAD</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>RADIOGRAFIAS</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EXAMENES</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>AMBULANCIA</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>COBERTURA</name>
-        <type>Number</type>
-        <format>0.000</format>
-        <currency>€</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>APROBADA</name>
-        <type>Boolean</type>
-        <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group>.</group>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Dim_poliza</name>
     <type>TableInput</type>
@@ -740,8 +556,8 @@
     </partitioning>
     <connection>SanaSalud-db</connection>
     <sql>SELECT
-   sk_dim_poliza,
-   nro_poliza
+    sk_dim_poliza,
+	nro_poliza
 FROM olap.dim_poliza
 </sql>
     <limit>0</limit>
@@ -780,7 +596,7 @@ FROM olap.dim_poliza
         <name>sk_dim_poliza</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim_historia_medica</origin>
+        <origin>Dim_poliza</origin>
         <comments>sk_dim_poliza</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>,</decimal_symbol>
@@ -803,7 +619,7 @@ FROM olap.dim_poliza
         <name>nro_poliza</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim_historia_medica</origin>
+        <origin>Dim_poliza</origin>
         <comments>nro_poliza</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -830,8 +646,8 @@ FROM olap.dim_poliza
       </output>
     </remotesteps>
     <GUI>
-      <xloc>266</xloc>
-      <yloc>66</yloc>
+      <xloc>272</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -923,64 +739,64 @@ FROM olap.dim_poliza
       <schema>olap</schema>
       <table>dim_poliza</table>
       <key>
-        <name>NRO_POLIZA</name>
+        <name>nro_poliza</name>
         <field>nro_poliza</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>NRO_POLIZA</name>
-        <rename>NRO_POLIZA</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>EMPRESA</name>
-        <rename>EMPRESA</rename>
+        <name>nro_poliza</name>
+        <rename>nro_poliza</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>TIPO_POLIZA</name>
-        <rename>TIPO_POLIZA</rename>
+        <name>empresa</name>
+        <rename>empresa</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>HOSPITALIZACION</name>
-        <rename>HOSPITALIZACION</rename>
+        <name>tipo_poliza</name>
+        <rename>tipo_poliza</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>CIRUGIA</name>
-        <rename>CIRUGIA</rename>
+        <name>hospitalizacion</name>
+        <rename>hospitalizacion</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>MATERNIDAD</name>
-        <rename>MATERNIDAD</rename>
+        <name>cirugia</name>
+        <rename>cirugia</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>RADIOGRAFIAS</name>
-        <rename>RADIOGRAFIAS</rename>
+        <name>maternidad</name>
+        <rename>maternidad</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>EXAMENES</name>
-        <rename>EXAMENES</rename>
+        <name>radiografias</name>
+        <rename>radiografias</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>AMBULANCIA</name>
-        <rename>AMBULANCIA</rename>
+        <name>examenes</name>
+        <rename>examenes</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>COBERTURA</name>
-        <rename>COBERTURA</rename>
+        <name>ambulancia</name>
+        <rename>ambulancia</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>APROBADA</name>
-        <rename>APROBADA</rename>
+        <name>cobertura</name>
+        <rename>cobertura</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>aprobada</name>
+        <rename>aprobada</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1000,67 +816,6 @@ FROM olap.dim_poliza
     <GUI>
       <xloc>922</xloc>
       <yloc>290</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Max SK</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SanaSalud-db</connection>
-    <sql>SELECT 
-   MAX(sk_dim_poliza) as max_sk
-FROM olap.dim_poliza
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>max_sk</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Max SK</origin>
-        <comments>max_sk</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>394</xloc>
-      <yloc>66</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1117,7 +872,7 @@ FROM olap.dim_poliza
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>NRO_POLIZA</name>
+        <name>nro_poliza</name>
         <field>nro_poliza</field>
       </key>
       <value>
@@ -1233,6 +988,112 @@ FROM olap.dim_poliza
     <GUI>
       <xloc>736</xloc>
       <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Poliza</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>SanaSalud-db</connection>
+    <rowlimit>0</rowlimit>
+    <sql>SELECT
+  nro_poliza
+, ci_paciente
+, empresa
+, titular
+, tipo_poliza
+, hospitalizacion
+, cirugia
+, maternidad
+, radiografias
+, examenes
+, ambulancia
+, cobertura
+, aprobada
+FROM "public".poliza</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+    </parameter>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Max SK</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>SanaSalud-db</connection>
+    <sql>SELECT 
+   MAX(sk_dim_poliza) as max_sk
+FROM olap.dim_poliza</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>max_sk</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Max SK 2</origin>
+        <comments>max_sk</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
