@@ -1,7 +1,18 @@
 # Sana Salud
 
-## Descripción
-<!-- TODO xD-->
+## Description
+This project is a database for a health insurance company called Sana Salud. It contains the following features:
+- The scripts to create the OLTP and OLAP databases.
+- The ETLs to extract, transform, and load the data from the OLTP database to the OLAP database.
+- The PowerBI reports to visualize the data in the OLAP database.
+
+## Dashboard Images
+
+### Factura Dashboard
+![Factura Dashboard](https://github.com/Alejo-FM/sanasalud-project/tree/main/public/factura.png)
+
+### Intervención Dashboard
+![Intervención Dashboard](https://github.com/Alejo-FM/sanasalud-project/tree/main/public/intervencion.png)
 
 ## Team Members
 - [**Alejandro Molina**](https://github.com/Alejo-FM)
