@@ -8,7 +8,7 @@ CREATE SCHEMA IF NOT EXISTS OLAP;
 -- * Dimensiones:
 ---------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_tiempo ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_tiempo (
     sk_dim_tiempo integer NOT NULL,
     fecha date NOT NULL,
     dia integer NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_tiempo ( -- !READY
     PRIMARY KEY (sk_dim_tiempo)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_tratamiento ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_tratamiento (
     sk_dim_tratamiento integer NOT NULL,
     id_tratamiento uuid NOT NULL,
     descripcion varchar NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_tratamiento ( -- !READY
     PRIMARY KEY (sk_dim_tratamiento)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_proveedor ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_proveedor (
     sk_dim_proveedor integer NOT NULL,
     id_proveedor uuid NOT NULL,
     nombre_proveedor varchar NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_proveedor ( -- !READY
     PRIMARY KEY (sk_dim_proveedor)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_medicamento ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_medicamento (
     sk_dim_medicamento integer NOT NULL,
     id_medicamento uuid NOT NULL,
     nombre_medicamento varchar NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_medicamento ( -- !READY
     CONSTRAINT "fk_proveedor" FOREIGN KEY (id_proveedor) REFERENCES OLAP.dim_proveedor(sk_dim_proveedor)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_intervencion ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_intervencion (
     sk_dim_intervencion integer NOT NULL,
     id_intervencion uuid NOT NULL,
     descripcion varchar NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_intervencion ( -- !READY
     PRIMARY KEY (sk_dim_intervencion)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_diagnostico ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_diagnostico (
     sk_dim_diagnostico integer NOT NULL,
     id_diagnostico uuid NOT NULL,
     descripcion varchar NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_diagnostico ( -- !READY
     PRIMARY KEY (sk_dim_diagnostico)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_paciente ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_paciente (
     sk_dim_paciente integer NOT NULL,
     cedula numeric NOT NULL, -- * Natural Key
     nombre_completo varchar NOT NULL, 
@@ -82,15 +82,10 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_paciente ( -- !READY
     id_estado_civil uuid NOT NULL,
     descripcion_estado_civil varchar NOT NULL,
     nacionalidad varchar NOT NULL,
-    -- TODO: La profe agrego los siguientes campos analizar luego si usarlos o no
-    -- hipertenso boolean NOT NULL,
-    -- astritis boolean NOT NULL,
-    -- osteoporosis boolean NOT NULL,
-    -- diabetes boolean NOT NULL,
     PRIMARY KEY (sk_dim_paciente)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_area ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_area (
     sk_dim_area integer NOT NULL,
     id_area uuid NOT NULL,
     piso varchar NOT NULL,
@@ -114,7 +109,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_tipo_servicio (
     PRIMARY KEY (sk_dim_tipo_servicio)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_medico ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_medico (
     sk_dim_medico integer NOT NULL,
     cedula numeric NOT NULL, -- * Natural Key
     cod_colegio_medico numeric NOT NULL,
@@ -147,7 +142,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_poliza (
     PRIMARY KEY (sk_dim_poliza)
 );
 
-CREATE TABLE IF NOT EXISTS OLAP.dim_personal_sanit ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.dim_personal_sanit (
     sk_dim_personal_sanit integer NOT NULL,
     cedula numeric NOT NULL, -- * Natural Key
     nombre_completo varchar NOT NULL,
@@ -158,7 +153,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_personal_sanit ( -- !READY
 );
 
 -- * Tabla puente para la relación de muchos a muchos entre medicina y tratamiento
-CREATE TABLE IF NOT EXISTS OLAP.puente_medicina_tratamiento ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.puente_medicina_tratamiento (
     medicamento integer NOT NULL,
     tratamiento integer NOT NULL,
     factor_peso float NOT NULL,
@@ -177,8 +172,6 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_registro_epidemiologico (
     PRIMARY KEY (sk_dim_registro_epidemiologico)
 );
 
--- TODO: Dimensión Historial medico ?
-
 CREATE TABLE IF NOT EXISTS OLAP.dim_historia_medica (
     sk_dim_historia_medica integer NOT NULL,
     nro_historia numeric NOT NULL,
@@ -192,8 +185,6 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_historia_medica (
     PRIMARY KEY (sk_dim_historia_medica)
 );
 
--- TODO: Dimensión estado_factura ?
-
 CREATE TABLE IF NOT EXISTS OLAP.dim_estado_factura (
     sk_dim_estado_factura integer NOT NULL,
     id_estado_factura uuid NOT NULL,
@@ -204,8 +195,6 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_estado_factura (
 ---------------------------------------------------------------
 -- * Hechos:
 ---------------------------------------------------------------
-
--- TODO: Hacer fact_facturacion
 
 CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
     id_factura uuid NOT NULL,
@@ -236,7 +225,6 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_facturacion (
     CONSTRAINT "fk_area" FOREIGN KEY (area) REFERENCES OLAP.dim_area(sk_dim_area)
 );
 
--- TODO: Revisar este fact
 CREATE TABLE IF NOT EXISTS OLAP.fact_intervencion (
     medico integer NOT NULL,
     paciente integer NOT NULL,
@@ -257,9 +245,7 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_intervencion (
     CONSTRAINT "fk_personal_sanitario" FOREIGN KEY (personal_sanitario) REFERENCES OLAP.dim_personal_sanit(sk_dim_personal_sanit)
 );
 
--- TODO: Recordar preguntar porque el costo no ta en el fact y si agreamos el costo dosis diario en el fact
 CREATE TABLE IF NOT EXISTS OLAP.fact_tratamiento (
-    medicamento integer NOT NULL,
     tratamiento integer NOT NULL,
     fecha_inicio_medicamento integer NOT NULL,
     fecha_fin_medicamento integer NOT NULL,
@@ -268,8 +254,7 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_tratamiento (
     fecha_elaboracion_tratamiento integer NOT NULL,
     cant_dias integer NOT NULL,
     num_ingreso numeric NOT NULL,
-    PRIMARY KEY (medicamento, tratamiento, fecha_inicio_medicamento, fecha_fin_medicamento, medico, paciente, fecha_elaboracion_tratamiento),
-    CONSTRAINT "fk_medicamento" FOREIGN KEY (medicamento) REFERENCES OLAP.dim_medicamento(sk_dim_medicamento),
+    PRIMARY KEY (tratamiento, fecha_inicio_medicamento, fecha_fin_medicamento, medico, paciente, fecha_elaboracion_tratamiento),
     CONSTRAINT "fk_tratamiento" FOREIGN KEY (tratamiento) REFERENCES OLAP.dim_tratamiento(sk_dim_tratamiento),
     CONSTRAINT "fk_fecha_inicio_medicamento" FOREIGN KEY (fecha_inicio_medicamento) REFERENCES OLAP.dim_tiempo(sk_dim_tiempo),
     CONSTRAINT "fk_fecha_fin_medicamento" FOREIGN KEY (fecha_fin_medicamento) REFERENCES OLAP.dim_tiempo(sk_dim_tiempo),
@@ -278,8 +263,7 @@ CREATE TABLE IF NOT EXISTS OLAP.fact_tratamiento (
     CONSTRAINT "fk_fecha_elaboracion_tratamiento" FOREIGN KEY (fecha_elaboracion_tratamiento) REFERENCES OLAP.dim_tiempo(sk_dim_tiempo)
 );
 
--- TODO: Recordar preguntar porque el costo no ta en el fact
-CREATE TABLE IF NOT EXISTS OLAP.fact_diagnostico ( -- !READY
+CREATE TABLE IF NOT EXISTS OLAP.fact_diagnostico (
     medico integer NOT NULL,
     paciente integer NOT NULL,
     diagnostico integer NOT NULL,

@@ -11,50 +11,50 @@ INSERT INTO Sexo ("id_sexo","descripcion") VALUES
 INSERT INTO Diagnostico ("id_diagnostico","tipo","nombre","descripcion","costo") VALUES
 -- Cardiología
 ('84a9c401-ac17-50d2-a52e-15cb86d86344','Clínico','Electrocardiografía (ECG)','Estudio de la actividad eléctrica del corazón utilizando electrodos ajustados a brazos, piernas y tórax',300.00),
-('20bd7d02-58ff-5d1b-9fd8-7ac17e3c9ca8','Clínico','Auscultación','Auscultar con un fonendoscopio para detectar los ruidos anómalos del corazón',300.00),
-('260083cb-670a-5d0c-bddf-666f8286dcca','Imagenología','Ecocardiografía','Exploración de la estructura y de la función cardíaca utilizando ultrasonidos',300.00),
+('20bd7d02-58ff-5d1b-9fd8-7ac17e3c9ca8','Clínico','Auscultación','Auscultar con un fonendoscopio para detectar los ruidos anómalos del corazón',350.00),
+('260083cb-670a-5d0c-bddf-666f8286dcca','Imagenología','Ecocardiografía','Exploración de la estructura y de la función cardíaca utilizando ultrasonidos',410.00),
 
 -- Cirugía
-('fe6d16da-cc06-43fa-893e-c787ec4e3d8a', 'laboratorio', 'Análisis de sangre completo', 'Evaluación de diversos componentes sanguíneos', 800),
-('b5b49948-2d98-4e60-be41-4a21b513dc33', 'clínico', 'Diabetes mellitus tipo 2', 'Enfermedad crónica que afecta la forma en que el cuerpo convierte el azúcar en energía', 1200),
-('fbc4e9a6-4d94-4c48-9bce-3588ffc6130c', 'imagenología', 'Radiografía de tórax', 'Imagen del tórax para evaluar el corazón y los pulmones', 500),
+('fe6d16da-cc06-43fa-893e-c787ec4e3d8a', 'laboratorio', 'Análisis de sangre completo', 'Evaluación de diversos componentes sanguíneos', 810),
+('b5b49948-2d98-4e60-be41-4a21b513dc33', 'clínico', 'Diabetes mellitus tipo 2', 'Enfermedad crónica que afecta la forma en que el cuerpo convierte el azúcar en energía', 1230),
+('fbc4e9a6-4d94-4c48-9bce-3588ffc6130c', 'imagenología', 'Radiografía de tórax', 'Imagen del tórax para evaluar el corazón y los pulmones', 750),
 
 -- Dermatología
 ('9b7d2dea-a00b-522d-89d8-6b92336b5f3f', 'Laboratorio', 'Pruebas cutáneas de alergia','Pruebas para detectar alergias realizadas mediante la colocación de una solución que contiene un posible alérgeno sobre la piel y pinchando a continuación la piel con una aguja',300.00),
-('c3fbe171-c95f-5221-9532-01c5bc127337', 'Laboratorio', 'Biopsia de piel','Extracción y examen de una muestra de piel en el microscopio para detectar un cáncer u otra anomalía',300.00),
+('c3fbe171-c95f-5221-9532-01c5bc127337', 'Laboratorio', 'Biopsia de piel','Extracción y examen de una muestra de piel en el microscopio para detectar un cáncer u otra anomalía',320.00),
 
 -- Endocrinología
-('43d5655c-2c4a-5bc2-84bd-78a3ce2aef22', 'Laboratorio', 'Prueba de anticuerpos antitiroideos','Mide ciertos anticuerpos tiroideos (indicadores en la sangre). Esta prueba puede ayudar a diagnosticar trastornos tiroideos autoinmunes',300.00),
+('43d5655c-2c4a-5bc2-84bd-78a3ce2aef22', 'Laboratorio', 'Prueba de anticuerpos antitiroideos','Mide ciertos anticuerpos tiroideos (indicadores en la sangre). Esta prueba puede ayudar a diagnosticar trastornos tiroideos autoinmunes',540.00),
 ('989103ec-e4bc-5e2d-ae9d-b7b47116c7dc', 'Imagenología', 'Gammagrafía de tiroides','Utiliza pequeñas cantidades de material radiactivo para crear una imagen de la tiroides, mostrando su tamaño, forma y posición. Puede ayudar a encontrar la causa del hipertiroidismo y detectar nódulos tiroideos (protuberancias en la tiroides)',300.00),
-('238dc22b-395b-5b28-89fc-9dca0bcdae52', 'Laboratorio', 'Prueba de captación tiroidea','Comprueba cómo la tiroides está funcionando y puede ayudar a encontrar la causa de hipertiroidismo',300.00),
+('238dc22b-395b-5b28-89fc-9dca0bcdae52', 'Laboratorio', 'Prueba de captación tiroidea','Comprueba cómo la tiroides está funcionando y puede ayudar a encontrar la causa de hipertiroidismo',610.00),
 
 -- Gastroenterología
-('57b96acd-9f7a-5fae-b79d-8f8305fdf533', 'Imagenología', 'Endoscopia','Examen visual directo de las estructuras internas utilizando un tubo de visión flexible',300.00),
-('ea270555-ed7e-50a2-b761-38db82fd797c', 'Laboratorio', 'Análisis para detectar sangre oculta','Prueba para detectar sangre en las heces',300.00),
-('57827498-0c2c-58fe-ab6c-81ec8e1ac5d7', 'Imagenología', 'Sigmoidoscopia','Inspección visual directa mediante una sonda óptica para detectar tumores u otras anomalías',300.00),
+('57b96acd-9f7a-5fae-b79d-8f8305fdf533', 'Imagenología', 'Endoscopia','Examen visual directo de las estructuras internas utilizando un tubo de visión flexible',1500.00),
+('ea270555-ed7e-50a2-b761-38db82fd797c', 'Laboratorio', 'Análisis para detectar sangre oculta','Prueba para detectar sangre en las heces',700.00),
+('57827498-0c2c-58fe-ab6c-81ec8e1ac5d7', 'Imagenología', 'Sigmoidoscopia','Inspección visual directa mediante una sonda óptica para detectar tumores u otras anomalías',155.00),
 
 -- Neurología
-('560c09c1-79d1-5118-ae40-fd1578602040', 'Clínico', 'Electroencefalografía (EEG)','Estudio de la actividad eléctrica del cerebro utilizando electrodos conectados al cuero cabelludo',300.00),
-('988f03de-66d2-5468-9e9e-b8fa30b680be', 'Imagenología', 'Arteriografía','Examen de los vasos sanguíneos del cerebro.',300.00),
-('c371a149-5999-5a6f-8096-5b3735eefd34', 'Imagenología', 'Resonancia magnética (MRI):','Imágenes detalladas del cerebro y sistema nervioso.',300.00),
+('560c09c1-79d1-5118-ae40-fd1578602040', 'Clínico', 'Electroencefalografía (EEG)','Estudio de la actividad eléctrica del cerebro utilizando electrodos conectados al cuero cabelludo',210.00),
+('988f03de-66d2-5468-9e9e-b8fa30b680be', 'Imagenología', 'Arteriografía','Examen de los vasos sanguíneos del cerebro.',220.00),
+('c371a149-5999-5a6f-8096-5b3735eefd34', 'Imagenología', 'Resonancia magnética (MRI):','Imágenes detalladas del cerebro y sistema nervioso.',970.00),
 
 -- Pediatría
-('5c027911-4ec9-5b6c-aa42-775b6cefb73c', 'Clínico', 'Examen de visión','Evaluación de la capacidad visual en niños.',300.00),
-('62e51f45-1325-5438-8254-74881b902317', 'Clínico', 'Prueba de audición','Evaluación de la audición en pacientes pediátricos.',300.00),
+('5c027911-4ec9-5b6c-aa42-775b6cefb73c', 'Clínico', 'Examen de visión','Evaluación de la capacidad visual en niños.',670.00),
+('62e51f45-1325-5438-8254-74881b902317', 'Clínico', 'Prueba de audición','Evaluación de la audición en pacientes pediátricos.',150.00),
 ('ed0a6509-be91-5a48-87bf-766830041148', 'Clínico', 'Prueba de desarrollo infantil.','Evaluación del desarrollo físico y mental en niños',300.00),
 
 -- Psiquiatría
-('9825a99c-445e-5f38-bbc7-5369f889d52e', 'Clínico', 'Evaluación psicológica','Análisis de la salud mental del paciente.',300.00),
-('9f8599a6-ffbd-5cfd-b43e-ce6884908266', 'Clínico', 'Prueba de función cognitiva','Evaluación de las funciones mentales y cognitivas.',300.00),
-('d626c0dd-716a-5c1f-a391-c91230522d69', 'Clínico', 'Prueba de personalidad','Evaluación de rasgos y estilos de personalidad.',300.00),
+('9825a99c-445e-5f38-bbc7-5369f889d52e', 'Clínico', 'Evaluación psicológica','Análisis de la salud mental del paciente.',700.00),
+('9f8599a6-ffbd-5cfd-b43e-ce6884908266', 'Clínico', 'Prueba de función cognitiva','Evaluación de las funciones mentales y cognitivas.',500.00),
+('d626c0dd-716a-5c1f-a391-c91230522d69', 'Clínico', 'Prueba de personalidad','Evaluación de rasgos y estilos de personalidad.',400.00),
 
 -- Radioterapia
-('7ff7f8df-bf84-51cc-9229-69315cccc559', 'Imagenología', 'Imagenología para radioterapia.','Estudio de imágenes para planificar el tratamiento',300.00),
-('01786bda-8319-5b93-b487-2f073b8b8b53', 'Imagenología', 'Escáner PET','Evaluación de la actividad metabólica de los tejidos para detectar cáncer',300.00),
+('7ff7f8df-bf84-51cc-9229-69315cccc559', 'Imagenología', 'Imagenología para radioterapia.','Estudio de imágenes para planificar el tratamiento',700.00),
+('01786bda-8319-5b93-b487-2f073b8b8b53', 'Imagenología', 'Escáner PET','Evaluación de la actividad metabólica de los tejidos para detectar cáncer',600.00),
 
 -- Traumatología
-('3f3e700a-f855-558a-a7c6-d34068c18130', 'Imagenología', 'Radiografía de extremidades','Examen de rayos X para evaluar fracturas y lesiones.',300.00),
-('81fbb6b8-3d71-5fc6-854a-8183234e31b9', 'Imagenología', 'Tomografía computarizada (TAC)','Imágenes detalladas para evaluar lesiones internas.',300.00),
+('3f3e700a-f855-558a-a7c6-d34068c18130', 'Imagenología', 'Radiografía de extremidades','Examen de rayos X para evaluar fracturas y lesiones.',100.00),
+('81fbb6b8-3d71-5fc6-854a-8183234e31b9', 'Imagenología', 'Tomografía computarizada (TAC)','Imágenes detalladas para evaluar lesiones internas.',200.00),
 ('995fbe33-5d80-5512-ab78-732fcd154fc4', 'Clínico', 'Examen físico','Evaluación general del paciente para identificar lesiones musculoesqueléticas.',300.00);
 
 INSERT INTO Intervencion ("id_intervencion","tipo","descripcion") VALUES
@@ -195,6 +195,7 @@ INSERT INTO Paciente ("cedula","nombre","apellido","fecha_nacimiento","tipo_sang
 (24789013, 'David', 'Salas', '1996-09-11', 'B-', 'Venezolano', 'aa988cdd-cce5-576f-a9c6-949ef1e94ee3', '71eb17bb-2d12-5660-90f2-b4e0a0a3caac', 'c855650a-a5bd-56d0-ace2-90750ae0998d'),
 (19901235, 'Santiago', 'Ortega', '1991-10-03', 'O+', 'Venezolano', '0f72c24c-dd9c-562a-b4b2-3ba7cd347ccc', '71eb17bb-2d12-5660-90f2-b4e0a0a3caac', '89349ce9-6552-52f2-88b5-c2feaa47463a'),
 (28123457, 'Manuel', 'Mora', '2001-06-27', 'B+', 'Venezolano', 'e6269b0c-41cb-5a23-9398-8ba72edb7d5e', '71eb17bb-2d12-5660-90f2-b4e0a0a3caac', '89349ce9-6552-52f2-88b5-c2feaa47463a'),
+-- A partir de aqui no tienen historia medica
 (30123465, 'Gabriela', 'Alvarez', '2003-07-05', 'A-', 'Venezolano', 'e6269b0c-41cb-5a23-9398-8ba72edb7d5e', '3fef0ae6-9c32-5113-af41-86ad8006607f', '89349ce9-6552-52f2-88b5-c2feaa47463a'),
 (29234568, 'Natalia', 'Paredes', '2002-09-18', 'AB-', 'Venezolano', 'b11caa7b-a474-52a4-a839-e67104e25b46', '3fef0ae6-9c32-5113-af41-86ad8006607f', '89349ce9-6552-52f2-88b5-c2feaa47463a'),
 (29586555, 'Javier', 'Serrano', '2002-05-01', 'O-', 'Venezolano', 'e6269b0c-41cb-5a23-9398-8ba72edb7d5e', '71eb17bb-2d12-5660-90f2-b4e0a0a3caac', '89349ce9-6552-52f2-88b5-c2feaa47463a'),
@@ -621,7 +622,13 @@ INSERT INTO Realiza ( "ci_medico","ci_paciente","diagnostico", "numero_ingreso",
 -- Psiquiatría
 (12777597,29234568,'9825a99c-445e-5f38-bbc7-5369f889d52e',59723052022,'2022-05-22'),
 (11495302,29586555,'9f8599a6-ffbd-5cfd-b43e-ce6884908266',59723052023,'2022-06-15'),
-(11569434,27224935,'d626c0dd-716a-5c1f-a391-c91230522d69',59723052024,'2022-07-10');
+(11569434,27224935,'d626c0dd-716a-5c1f-a391-c91230522d69',59723052024,'2022-07-10'),
+
+-- Nuevos registros de realiza para enero 2025
+(18676295, 16428665, 'c371a149-5999-5a6f-8096-5b3735eefd34', 1234567918, '2025-01-10'),
+(15526267, 17023670, 'd626c0dd-716a-5c1f-a391-c91230522d69', 1234567919, '2025-01-15'),
+(11240089, 29586555, 'fbc4e9a6-4d94-4c48-9bce-3588ffc6130c', 1234567920, '2025-01-20'),
+(19269386, 7046720, 'fe6d16da-cc06-43fa-893e-c787ec4e3d8a', 1234567921, '2025-01-25');
 
 INSERT INTO PRESCRIBE ( "ci_medico","ci_paciente","tratamiento", "numero_ingreso","fecha_elaboracion") VALUES
 -- Cardiología
@@ -662,46 +669,62 @@ INSERT INTO PRESCRIBE ( "ci_medico","ci_paciente","tratamiento", "numero_ingreso
 
 -- Psiquiatría
 (11495302, 29586555, 'b4279c47-0b59-5633-91da-2a6779d930fe', 59723052023, '2022-06-15'),
-(12777597, 29234568, 'b4c820e5-6cb3-5300-810a-af7f59ce466a', 59723052022, '2022-05-22');
+(12777597, 29234568, 'b4c820e5-6cb3-5300-810a-af7f59ce466a', 59723052022, '2022-05-22'),
+
+-- Nuevos registros de prescribe para enero 2025
+(18676295, 16428665, '8d89328e-476c-4861-9332-dbb5b46dfdd2', 1234567918, '2025-01-10'),
+(15526267, 17023670, 'c9741d12-443f-541f-a66f-63bf210c9c75', 1234567919, '2025-01-15'),
+(11240089, 29586555, 'ad1cf50f-6f91-5ffa-ab66-d607ab7ffaa2', 1234567920, '2025-01-20'),
+(19269386, 7046720, '770281f9-b350-5716-8f92-158bfc6516ae', 1234567921, '2025-01-25');
 
 INSERT INTO Aplica ( "medicamento","tratamiento", "cant_dias","fecha_inicio","fecha_fin") VALUES
 -- Psiquiatría
 ('a4f6937b-aa7b-5baf-b6e8-01f821f96b57','b4c820e5-6cb3-5300-810a-af7f59ce466a',5,'2022-05-23','2022-05-28'),
 ('a4f6937b-aa7b-5baf-b6e8-01f821f96b57','b4279c47-0b59-5633-91da-2a6779d930fe',10,'2022-06-16','2022-06-26'),
+('a4f6937b-aa7b-5baf-b6e8-01f821f96b57','16442917-012f-5e52-9c33-24f811d21e81',7,'2022-07-11','2022-07-17'),
 
 -- Cardiología
 ('e5a7432d-fb95-5f9a-9d1f-09e7593422ad','686d6b61-3fa1-5444-bf9a-d6ed6b6ce5ee', 10, '2021-03-16', '2021-03-25'),
 ('f45e2897-9e21-5894-b44d-6f5438bf7e36','16442917-012f-5e52-9c33-24f811d21e81', 15, '2021-04-21', '2021-05-05'),
+('e5a7432d-fb95-5f9a-9d1f-09e7593422ad','16442917-012f-5e52-9c33-24f811d21e81', 10, '2021-04-21', '2021-04-30'),
 
 -- Cirugía
 ('3b67f7e2-94e5-58e5-a79c-71a62c3a2b3a','cb12980d-2672-4498-af23-d51cd3951705', 7, '2021-07-01', '2021-07-07'),
 ('7c5d3e90-b03b-5b70-9238-bd764e8fb57e','8d89328e-476c-4861-9332-dbb5b46dfdd2', 10, '2021-07-16', '2021-07-25'),
+('3b67f7e2-94e5-58e5-a79c-71a62c3a2b3a','8d89328e-476c-4861-9332-dbb5b46dfdd2', 7, '2021-07-16', '2021-07-22'),
 
 -- Dermatología
+('8cb7f94d-07eb-5cf3-bbe2-1dbf3d7e9587','1704d4d1-5b42-5d08-86ca-55355b64b24c', 14, '2021-10-02', '2021-10-15'),
 ('8cb7f94d-07eb-5cf3-bbe2-1dbf3d7e9587','c9741d12-443f-541f-a66f-63bf210c9c75', 14, '2021-09-06', '2021-09-19'),
 ('f317eb7d-bdcc-510c-b0ef-b5b1f4dff45d','1704d4d1-5b42-5d08-86ca-55355b64b24c', 20, '2021-10-02', '2021-10-21'),
 
 -- Endocrinología
 ('da92763c-8f9c-56c1-bb85-b97bf61862d4','ad1cf50f-6f91-5ffa-ab66-d607ab7ffaa2', 30, '2021-12-16', '2022-01-14'),
 ('aeb85d74-bf63-541f-b8d3-1271b347fd6b','770281f9-b350-5716-8f92-158bfc6516ae', 25, '2022-01-11', '2022-02-04'),
+('da92763c-8f9c-56c1-bb85-b97bf61862d4','770281f9-b350-5716-8f92-158bfc6516ae', 30, '2022-01-11', '2022-02-09'),
 
 -- Gastroenterología
 ('8f45e37b-69f9-5715-b0db-cd6343f6b23c','0925a3b0-cc4c-54a0-9b5c-445a35830943', 15, '2022-03-02', '2022-03-16'),
 ('c3d75b19-97d9-5039-936d-c54f2dc6a26c','13928637-577d-5ae1-a2d5-6b30b78ad458', 20, '2022-04-21', '2022-05-10'),
+('8f45e37b-69f9-5715-b0db-cd6343f6b23c','13928637-577d-5ae1-a2d5-6b30b78ad458', 15, '2022-04-21', '2022-05-05'),
 
 -- Neurología
 ('7b1c67f2-bb67-510c-90c2-9234f7c6e819','265b06ad-f4f1-5e5b-bb85-dcab397b8d80', 10, '2022-06-11', '2022-06-20'),
 ('29c87e12-45db-5bf0-9826-cf8f7d6a5c73','ddaaec73-7992-5201-85a7-5c504cd34d2d', 15, '2022-07-06', '2022-07-20'),
+('7b1c67f2-bb67-510c-90c2-9234f7c6e819','ddaaec73-7992-5201-85a7-5c504cd34d2d', 10, '2022-07-06', '2022-07-15'),
 
 -- Pediatría
+('4b879c5d-f18c-512e-b0d9-3a6b65d2c819','21d0bde6-3955-5998-8083-fdbda64d8a2d', 7, '2022-10-16', '2022-10-22'),
 ('4b879c5d-f18c-512e-b0d9-3a6b65d2c819','e5f4e296-b281-57f3-b2ad-5ad12aa1ac7c', 7, '2022-09-21', '2022-09-27'),
 ('fd23e65a-b89e-507e-98c6-dc87f2b1c953','21d0bde6-3955-5998-8083-fdbda64d8a2d', 10, '2022-10-16', '2022-10-25'),
 
 -- Radioterapia
 ('8c97e5b6-75f3-53e9-b5d2-cd7b623e9f28','4d627ab3-1c0f-5487-b1b1-016f0b550784', 20, '2022-12-06', '2022-12-25'),
 ('8c97e5b6-75f3-53e9-b5d2-cd7b623e9f28','c1d06188-1762-5c6d-86dc-10de044de704', 15, '2023-01-02', '2023-01-16'),
+('8c97e5b6-75f3-53e9-b5d2-cd7b623e9f28','28b4cb18-944d-5d44-8162-5a56d1a6295a', 20, '2023-01-02', '2023-01-21'),
 
 -- Traumatología
+('b95d37c1-29c8-5e10-9d76-cd723f6b1d93','28b4cb18-944d-5d44-8162-5a56d1a6295a', 10, '2023-04-11', '2023-04-20'),
 ('b95d37c1-29c8-5e10-9d76-cd723f6b1d93','7362d20d-9cb7-5d95-849f-2916e4022a7c', 10, '2023-03-16', '2023-03-25'),
 ('dcf7b6a3-9827-563f-b1d8-c92e7f5a1b82','28b4cb18-944d-5d44-8162-5a56d1a6295a', 7, '2023-04-11', '2023-04-17');
 
@@ -745,11 +768,25 @@ INSERT INTO Practica ( "ci_medico","ci_paciente","intervencion","personal_sanita
 
 -- -- Psiquiatría
 (11569434, 27224935, '66bf0e44-b3f2-5f07-9244-92af1e51138d', 19546398, '2022-07-10', 'alto', 3.5, 700, 4500, 3500),
-(12777597, 29234568, '66bf0e44-b3f2-5f07-9244-92af1e51138d', 17847485, '2022-05-22', 'medio', 3.0, 600, 4000, 3000);
+(12777597, 29234568, '66bf0e44-b3f2-5f07-9244-92af1e51138d', 17847485, '2022-05-22', 'medio', 3.0, 600, 4000, 3000),
 
+-- Nuevos registros de practica para enero 2025
+(18676295, 7046720, 'a7dc07c2-e580-528f-a9dd-fb5a0d4e698f', 17846520, '2025-01-10', 'medio', 3.0, 700, 3500, 2500),
+(15526267, 16428665, 'c3dcc2c5-08e9-536c-8f12-1d687e144527', 20228329, '2025-01-15', 'bajo', 1.5, 300, 2000, 1500),
+(11240089, 29586555, 'd2a1eb63-31fe-530a-8c25-a0dc9ffa7916', 16561400, '2025-01-20', 'alto', 3.0, 600, 4000, 3000),
+(19269386, 19099695, 'f11a5a29-9b46-50bf-9969-b4d8ec2b5c62', 18105584, '2025-01-25', 'bajo', 2.0, 400, 3000, 2000);
 
--- INSERT INTO Ocupa ( "ci_paciente","numero_cama", "fecha_inicio","cantidad_dias","dias_cubiertos_seguro","costo_diario") VALUES
+-- Examen físico (Diagnostico)
+INSERT INTO Realiza ( "ci_medico","ci_paciente","diagnostico", "numero_ingreso","fecha_elaboracion") VALUES
+(12647863, 19099695, '995fbe33-5d80-5512-ab78-732fcd154fc4', 1234567917, '2025-01-13');
 
+-- Tratamiento de apendicitis (Tratamiento)
+INSERT INTO PRESCRIBE ( "ci_medico","ci_paciente","tratamiento", "numero_ingreso","fecha_elaboracion") VALUES
+(12647863, 19099695, 'cb12980d-2672-4498-af23-d51cd3951705', 1234567917, '2025-01-13');
+
+-- Reparación de ligamento (Intervención)
+INSERT INTO Practica ( "ci_medico","ci_paciente","intervencion","personal_sanitario", "fecha","riesgo","duracion","gasto_equipos","costo","honorario_equipo") VALUES
+(12647863, 17023670, '6baa7c90-cf72-5e4f-a491-013af27cadb1', 19392230, '2025-01-13', 'bajo', 2.5, 500, 3000, 2000);
 
 CALL actualizar_facturas();
 

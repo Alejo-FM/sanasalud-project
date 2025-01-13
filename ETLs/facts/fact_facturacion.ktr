@@ -431,20 +431,20 @@
     <created_date>2024/12/24 22:27:00.841</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/12/24 22:27:00.841</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
     <name>SanaSalud-db</name>
-    <server>localhost</server>
+    <server>${DB_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>sanasalud</database>
-    <port>3001</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f297aa17af63df9ebade</password>
+    <database>${DB_NAME}</database>
+    <port>${DB_PORT}</port>
+    <username>${DB_USERNAME}</username>
+    <password>${DB_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -467,7 +467,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3001</attribute>
+        <attribute>${DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -493,7 +493,7 @@
   </connection>
   <order>
     <hop>
-      <from>Dim Medico</from>
+      <from>Enlace Medico</from>
       <to>Medico lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -503,7 +503,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Paciente</from>
+      <from>Enlace Paciente</from>
       <to>Paciente lookup </to>
       <enabled>Y</enabled>
     </hop>
@@ -513,12 +513,12 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Historia Medica</from>
+      <from>Enlace Medica</from>
       <to>Historia Medica lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Fecha Emision</from>
+      <from>Enlace Fecha Emision</from>
       <to>Tiempo lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -538,12 +538,12 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Tipo Servicio</from>
+      <from>Enlace Tipo Servicio</from>
       <to>Tipo Servicio lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Fecha Culminacion</from>
+      <from>Enlace Fecha Culminacion</from>
       <to>Tiempo culminacion lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -553,7 +553,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Estado Factura</from>
+      <from>Enlace Estado Factura</from>
       <to>Estado Factura lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -563,7 +563,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Poliza</from>
+      <from>Enlace Poliza</from>
       <to>Poliza lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -573,7 +573,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Area</from>
+      <from>Enlace Area</from>
       <to>Area lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -609,7 +609,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Area</from>
+    <from>Enlace Area</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -697,7 +697,7 @@
       <field_name>monto_total</field_name>
       <calc_type>ADD</calc_type>
       <field_a>costo_servicio</field_a>
-      <field_b>medico</field_b>
+      <field_b>impuesto</field_b>
       <field_c/>
       <value_type>None</value_type>
       <value_length>-1</value_length>
@@ -723,7 +723,7 @@
     </GUI>
   </step>
   <step>
-    <name>Dim Area</name>
+    <name>Enlace Area</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -751,11 +751,11 @@ FROM olap.dim_area</sql>
         <name>sk_dim_area</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Areaa</origin>
+        <origin>Dim Area</origin>
         <comments>sk_dim_area</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -764,7 +764,7 @@ FROM olap.dim_area</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -774,11 +774,11 @@ FROM olap.dim_area</sql>
         <name>id_area</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Areaa</origin>
+        <origin>Dim Area</origin>
         <comments>id_area</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -787,7 +787,7 @@ FROM olap.dim_area</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -807,7 +807,7 @@ FROM olap.dim_area</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Estado Factura</name>
+    <name>Enlace Estado Factura</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -835,11 +835,11 @@ FROM olap.dim_estado_factura</sql>
         <name>sk_dim_estado_factura</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Tipo Servicio 2</origin>
+        <origin>Dim Estado Factura</origin>
         <comments>sk_dim_estado_factura</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -848,7 +848,7 @@ FROM olap.dim_estado_factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -858,11 +858,11 @@ FROM olap.dim_estado_factura</sql>
         <name>id_estado_factura</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Tipo Servicio 2</origin>
+        <origin>Dim Estado Factura</origin>
         <comments>id_estado_factura</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -871,7 +871,7 @@ FROM olap.dim_estado_factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -891,7 +891,7 @@ FROM olap.dim_estado_factura</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Fecha Culminacion</name>
+    <name>Enlace Fecha Culminacion</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -919,11 +919,11 @@ FROM olap.dim_tiempo</sql>
         <name>sk_dim_tiempo</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Fecha Emision 2</origin>
+        <origin>Dim Fecha Culminacion</origin>
         <comments>sk_dim_tiempo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -932,7 +932,7 @@ FROM olap.dim_tiempo</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -942,11 +942,11 @@ FROM olap.dim_tiempo</sql>
         <name>fecha</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Fecha Emision 2</origin>
+        <origin>Dim Fecha Culminacion</origin>
         <comments>fecha</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -955,7 +955,7 @@ FROM olap.dim_tiempo</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -975,7 +975,7 @@ FROM olap.dim_tiempo</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Fecha Emision</name>
+    <name>Enlace Fecha Emision</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1003,11 +1003,11 @@ FROM olap.dim_tiempo</sql>
         <name>sk_dim_tiempo</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Tiempo</origin>
+        <origin>Dim Fecha Emision</origin>
         <comments>sk_dim_tiempo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1016,7 +1016,7 @@ FROM olap.dim_tiempo</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1026,11 +1026,11 @@ FROM olap.dim_tiempo</sql>
         <name>fecha</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Tiempo</origin>
+        <origin>Dim Fecha Emision</origin>
         <comments>fecha</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1039,7 +1039,7 @@ FROM olap.dim_tiempo</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1059,7 +1059,7 @@ FROM olap.dim_tiempo</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Historia Medica</name>
+    <name>Enlace Medica</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1090,8 +1090,8 @@ FROM olap.dim_historia_medica</sql>
         <origin>Dim Historia Medica</origin>
         <comments>sk_dim_historia_medica</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1100,7 +1100,7 @@ FROM olap.dim_historia_medica</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1123,7 +1123,7 @@ FROM olap.dim_historia_medica</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1143,7 +1143,7 @@ FROM olap.dim_historia_medica</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Medico</name>
+    <name>Enlace Medico</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1171,7 +1171,7 @@ FROM olap.dim_medico</sql>
         <name>sk_dim_medico</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Medico</origin>
+        <origin>Dim Medico</origin>
         <comments>sk_dim_medico</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1194,7 +1194,7 @@ FROM olap.dim_medico</sql>
         <name>cedula</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Medico</origin>
+        <origin>Dim Medico</origin>
         <comments>cedula</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1221,13 +1221,13 @@ FROM olap.dim_medico</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>160</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Dim Paciente</name>
+    <name>Enlace Paciente</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1255,7 +1255,7 @@ FROM olap.dim_paciente</sql>
         <name>sk_dim_paciente</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Paciente</origin>
+        <origin>Dim Paciente</origin>
         <comments>sk_dim_paciente</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1278,7 +1278,7 @@ FROM olap.dim_paciente</sql>
         <name>cedula</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Paciente</origin>
+        <origin>Dim Paciente</origin>
         <comments>cedula</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1305,13 +1305,13 @@ FROM olap.dim_paciente</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>336</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Dim Poliza</name>
+    <name>Enlace Poliza</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1339,11 +1339,11 @@ FROM olap.dim_poliza</sql>
         <name>sk_dim_poliza</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Estado Factura 2</origin>
+        <origin>Dim Poliza</origin>
         <comments>sk_dim_poliza</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1352,7 +1352,7 @@ FROM olap.dim_poliza</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1362,7 +1362,7 @@ FROM olap.dim_poliza</sql>
         <name>nro_poliza</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Estado Factura 2</origin>
+        <origin>Dim Poliza</origin>
         <comments>nro_poliza</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1375,7 +1375,7 @@ FROM olap.dim_poliza</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1395,7 +1395,7 @@ FROM olap.dim_poliza</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Tipo Servicio</name>
+    <name>Enlace Tipo Servicio</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1423,11 +1423,11 @@ FROM olap.dim_tipo_servicio</sql>
         <name>sk_dim_tipo_servicio</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Tipo Servicio</origin>
+        <origin>Enalce Tipo Servicio</origin>
         <comments>sk_dim_tipo_servicio</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1436,7 +1436,7 @@ FROM olap.dim_tipo_servicio</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1446,11 +1446,11 @@ FROM olap.dim_tipo_servicio</sql>
         <name>id_tipo_servicio</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Tipo Servicio</origin>
+        <origin>Enalce Tipo Servicio</origin>
         <comments>id_tipo_servicio</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1459,7 +1459,7 @@ FROM olap.dim_tipo_servicio</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1473,7 +1473,7 @@ FROM olap.dim_tipo_servicio</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
+      <xloc>496</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1489,7 +1489,7 @@ FROM olap.dim_tipo_servicio</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Estado Factura</from>
+    <from>Enlace Estado Factura</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1564,8 +1564,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>id_factura</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1574,7 +1574,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1597,7 +1597,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1620,7 +1620,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1633,8 +1633,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>area</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1643,7 +1643,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1666,7 +1666,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1679,8 +1679,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>tipo_servicio</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1689,7 +1689,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1702,8 +1702,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>estado_factura</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1712,7 +1712,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1725,8 +1725,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>nro_poliza</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1735,7 +1735,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1748,8 +1748,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>fecha_emision</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1758,7 +1758,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1771,8 +1771,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>fecha_vencimiento</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1781,7 +1781,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1794,8 +1794,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>fecha_pago</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1804,7 +1804,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1827,7 +1827,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1840,8 +1840,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>costo_servicio</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1850,7 +1850,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1863,8 +1863,8 @@ FROM Factura</sql>
         <origin>Factura</origin>
         <comments>impuesto</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1873,7 +1873,7 @@ FROM Factura</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_MX</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1887,7 +1887,7 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>16</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1903,7 +1903,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Historia Medica</from>
+    <from>Enlace Medica</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2032,6 +2032,11 @@ FROM Factura</sql>
         <rename>id_factura</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>historia_medica</name>
+        <rename>sk_dim_historia_medica</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -2042,8 +2047,8 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
-      <yloc>256</yloc>
+      <xloc>1616</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2058,7 +2063,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Medico</from>
+    <from>Enlace Medico</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2084,7 +2089,7 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>160</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2100,7 +2105,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Paciente</from>
+    <from>Enlace Paciente</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2126,7 +2131,7 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>336</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2142,7 +2147,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Poliza</from>
+    <from>Enlace Poliza</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>N</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2184,7 +2189,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Fecha Culminacion</from>
+    <from>Enlace Fecha Culminacion</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2226,7 +2231,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Fecha Emision</from>
+    <from>Enlace Fecha Emision</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2268,7 +2273,7 @@ FROM Factura</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Tipo Servicio</from>
+    <from>Enlace Tipo Servicio</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -2294,7 +2299,7 @@ FROM Factura</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
+      <xloc>496</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>

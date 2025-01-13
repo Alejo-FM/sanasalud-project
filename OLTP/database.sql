@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS Personal_Sanitario (
 CREATE TABLE IF NOT EXISTS Cama (
     numero_cama numeric NOT NULL,
     area_hospital uuid NOT NULL,
-    PRIMARY KEY (numero_cama), -- ! Chekear si area_hospital es PK
+    PRIMARY KEY (numero_cama),
     CONSTRAINT "fk_area_hospital" FOREIGN KEY (area_hospital) REFERENCES Area(id_area)
 );
 
