@@ -437,13 +437,13 @@
   </notepads>
   <connection>
     <name>SanaSalud-db</name>
-    <server>localhost</server>
+    <server>${DB_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>sanasalud</database>
-    <port>3001</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f297aa17af63df9ebade</password>
+    <database>${DB_NAME}</database>
+    <port>${DB_PORT}</port>
+    <username>${DB_USERNAME}</username>
+    <password>${DB_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -466,7 +466,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3001</attribute>
+        <attribute>${DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -492,12 +492,12 @@
   </connection>
   <order>
     <hop>
-      <from>Dim Medico</from>
+      <from>Enlace Medico</from>
       <to>Medico lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Paciente</from>
+      <from>Enlace Paciente</from>
       <to>Paciente lookup </to>
       <enabled>Y</enabled>
     </hop>
@@ -522,37 +522,22 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Tiempo</from>
+      <from>Enlace Tiempo</from>
       <to>Time I lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Tiempo</from>
+      <from>Enlace Tiempo</from>
       <to>Time II lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Tiempo</from>
+      <from>Enlace Tiempo</from>
       <to>Time III lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Medicamento</from>
-      <to>Medicamento lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Aplica - Prescribe</from>
-      <to>Medicamento lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Medicamento lookup</from>
-      <to>Tratamiento lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Dim Tratamiento</from>
+      <from>Enlace Tratamiento</from>
       <to>Tratamiento lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -564,6 +549,11 @@
     <hop>
       <from>Time III lookup</from>
       <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Aplica - Prescribe</from>
+      <to>Tratamiento lookup</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -580,17 +570,17 @@
     </partitioning>
     <connection>SanaSalud-db</connection>
     <sql>SELECT
-	ap.medicamento as id_medicamento,
-	ap.tratamiento as id_tratamiento,
-	ap.fecha_inicio as fecha_inicio_AP,
-	ap.fecha_fin as fecha_fin_AP,
+	DISTINCT ap.tratamiento as id_tratamiento,
+	MIN(ap.fecha_inicio) as fecha_inicio_AP,
+	MAX(ap.fecha_fin) as fecha_fin_AP,
 	p.ci_medico,
 	p.ci_paciente,
 	p.fecha_elaboracion,
-	ap.cant_dias,
+	SUM(ap.cant_dias) as cant_dias,
 	p.numero_ingreso
 from aplica ap 
-	JOIN prescribe p ON ap.tratamiento = p.tratamiento</sql>
+	JOIN prescribe p ON ap.tratamiento = p.tratamiento
+GROUP by ap.tratamiento, p.ci_medico, p.ci_paciente, p.fecha_elaboracion, p.numero_ingreso</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -601,33 +591,10 @@ from aplica ap
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>id_medicamento</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Intervención</origin>
-        <comments>id_medicamento</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_MX</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
         <name>id_tratamiento</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>id_tratamiento</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -650,7 +617,7 @@ from aplica ap
         <name>fecha_inicio_ap</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>fecha_inicio_ap</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -673,7 +640,7 @@ from aplica ap
         <name>fecha_fin_ap</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>fecha_fin_ap</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -696,7 +663,7 @@ from aplica ap
         <name>ci_medico</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>ci_medico</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -719,7 +686,7 @@ from aplica ap
         <name>ci_paciente</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>ci_paciente</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -742,7 +709,7 @@ from aplica ap
         <name>fecha_elaboracion</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>fecha_elaboracion</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -765,7 +732,7 @@ from aplica ap
         <name>cant_dias</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>cant_dias</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -788,7 +755,7 @@ from aplica ap
         <name>numero_ingreso</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Intervención</origin>
+        <origin>Aplica - Prescribe</origin>
         <comments>numero_ingreso</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -815,97 +782,13 @@ from aplica ap
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
+      <xloc>272</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Dim Medicamento</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SanaSalud-db</connection>
-    <sql>SELECT
-	sk_dim_medicamento,
-	id_medicamento
-FROM olap.dim_medicamento</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>sk_dim_medicamento</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Dim Medico 2</origin>
-        <comments>sk_dim_medicamento</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_MX</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>id_medicamento</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Dim Medico 2</origin>
-        <comments>id_medicamento</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_MX</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Dim Medico</name>
+    <name>Enlace Medico</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -989,7 +872,7 @@ FROM olap.dim_medico</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Paciente</name>
+    <name>Enlace Paciente</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1073,7 +956,7 @@ FROM olap.dim_paciente</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Tiempo</name>
+    <name>Enlace Tiempo</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -1157,7 +1040,7 @@ FROM olap.dim_tiempo</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Tratamiento</name>
+    <name>Enlace Tratamiento</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1185,7 +1068,7 @@ FROM olap.dim_tratamiento</sql>
         <name>sk_dim_tratamiento</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Dim Medicamento 2</origin>
+        <origin>Dim Tratamiento</origin>
         <comments>sk_dim_tratamiento</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1208,7 +1091,7 @@ FROM olap.dim_tratamiento</sql>
         <name>id_tratamiento</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Dim Medicamento 2</origin>
+        <origin>Dim Tratamiento</origin>
         <comments>id_tratamiento</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1258,12 +1141,6 @@ FROM olap.dim_tratamiento</sql>
       <schema>olap</schema>
       <table>fact_tratamiento</table>
       <key>
-        <name>medicamento</name>
-        <field>medicamento</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
         <name>tratamiento</name>
         <field>tratamiento</field>
         <condition>=</condition>
@@ -1307,11 +1184,6 @@ FROM olap.dim_tratamiento</sql>
       <value>
         <name>num_ingreso</name>
         <rename>numero_ingreso</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>medicamento</name>
-        <rename>medicamento</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1360,48 +1232,6 @@ FROM olap.dim_tratamiento</sql>
     </GUI>
   </step>
   <step>
-    <name>Medicamento lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Dim Medicamento</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>id_medicamento</name>
-        <field>id_medicamento</field>
-      </key>
-      <value>
-        <name>sk_dim_medicamento</name>
-        <rename>medicamento</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Medico lookup</name>
     <type>StreamLookup</type>
     <description/>
@@ -1412,7 +1242,7 @@ FROM olap.dim_tratamiento</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Medico</from>
+    <from>Enlace Medico</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1454,7 +1284,7 @@ FROM olap.dim_tratamiento</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Paciente</from>
+    <from>Enlace Paciente</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1496,7 +1326,7 @@ FROM olap.dim_tratamiento</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Tiempo</from>
+    <from>Enlace Tiempo</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1538,7 +1368,7 @@ FROM olap.dim_tratamiento</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Tiempo</from>
+    <from>Enlace Tiempo</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1580,7 +1410,7 @@ FROM olap.dim_tratamiento</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Tiempo</from>
+    <from>Enlace Tiempo</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1622,7 +1452,7 @@ FROM olap.dim_tratamiento</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Tratamiento</from>
+    <from>Enlace Tratamiento</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>

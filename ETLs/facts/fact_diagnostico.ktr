@@ -437,13 +437,13 @@
   </notepads>
   <connection>
     <name>SanaSalud-db</name>
-    <server>localhost</server>
+    <server>${DB_HOST}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>sanasalud</database>
-    <port>3001</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f297aa17af63df9ebade</password>
+    <database>${DB_NAME}</database>
+    <port>${DB_PORT}</port>
+    <username>${DB_USERNAME}</username>
+    <password>${DB_PASSWORD}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -466,7 +466,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3001</attribute>
+        <attribute>${DB_PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -492,7 +492,7 @@
   </connection>
   <order>
     <hop>
-      <from>Dim Medico</from>
+      <from>Enlace Medico</from>
       <to>Medico lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -502,7 +502,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Paciente</from>
+      <from>Enlace Paciente</from>
       <to>Paciente lookup </to>
       <enabled>Y</enabled>
     </hop>
@@ -512,7 +512,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Diagnostico</from>
+      <from>Enlace Diagnostico</from>
       <to>Diagnostico lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -522,7 +522,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dim Tiempo</from>
+      <from>Enlace Tiempo</from>
       <to>Tiempo lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -704,7 +704,7 @@ FROM realiza</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Diagnostico</from>
+    <from>Enlace Diagnostico</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -736,7 +736,7 @@ FROM realiza</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Diagnostico</name>
+    <name>Enlace Diagnostico</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -764,7 +764,7 @@ FROM olap.dim_diagnostico</sql>
         <name>sk_dim_diagnostico</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input 3</origin>
+        <origin>Dim Diagnostico</origin>
         <comments>sk_dim_diagnostico</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -787,7 +787,7 @@ FROM olap.dim_diagnostico</sql>
         <name>id_diagnostico</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input 3</origin>
+        <origin>Dim Diagnostico</origin>
         <comments>id_diagnostico</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -820,7 +820,7 @@ FROM olap.dim_diagnostico</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Medico</name>
+    <name>Enlace Medico</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -848,7 +848,7 @@ FROM olap.dim_medico</sql>
         <name>sk_dim_medico</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Medico</origin>
+        <origin>Dim Medico</origin>
         <comments>sk_dim_medico</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -871,7 +871,7 @@ FROM olap.dim_medico</sql>
         <name>cedula</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Medico</origin>
+        <origin>Dim Medico</origin>
         <comments>cedula</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -904,7 +904,7 @@ FROM olap.dim_medico</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Paciente</name>
+    <name>Enlace Paciente</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -932,7 +932,7 @@ FROM olap.dim_paciente</sql>
         <name>sk_dim_paciente</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Paciente</origin>
+        <origin>Dim Paciente</origin>
         <comments>sk_dim_paciente</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -955,7 +955,7 @@ FROM olap.dim_paciente</sql>
         <name>cedula</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Paciente</origin>
+        <origin>Dim Paciente</origin>
         <comments>cedula</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -988,7 +988,7 @@ FROM olap.dim_paciente</sql>
     </GUI>
   </step>
   <step>
-    <name>Dim Tiempo</name>
+    <name>Enlace Tiempo</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1016,7 +1016,7 @@ FROM olap.dim_tiempo</sql>
         <name>sk_dim_tiempo</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input 3 2</origin>
+        <origin>Dim Tiempo</origin>
         <comments>sk_dim_tiempo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1039,7 +1039,7 @@ FROM olap.dim_tiempo</sql>
         <name>fecha</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input 3 2</origin>
+        <origin>Dim Tiempo</origin>
         <comments>fecha</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1163,7 +1163,7 @@ FROM olap.dim_tiempo</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Medico</from>
+    <from>Enlace Medico</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1205,7 +1205,7 @@ FROM olap.dim_tiempo</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Paciente</from>
+    <from>Enlace Paciente</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1247,7 +1247,7 @@ FROM olap.dim_tiempo</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Dim Tiempo</from>
+    <from>Enlace Tiempo</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
