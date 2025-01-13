@@ -28,7 +28,20 @@ npm run reset
 npm run delete
 ```
 
+## Details to use the ETLs
+
+To use the ETLs, you need to set the following environment variables in `Edit > Set Environment Variables`:
+
+- `DB_HOST`: The hostname of your database.
+- `DB_USER`: The username to access your database.
+- `DB_PASSWORD`: The password to access your database.
+- `DB_NAME`: The name of your database.
+- `DB_PORT`: The port of your database.
+- `BI_PATH`: The path to the project folder.
+
+Make sure to configure these variables correctly before running the ETLs.
+
 ## Technologies
 - PostgreSQL
 - PowerBI
-
+- Pentaho Data Integration
