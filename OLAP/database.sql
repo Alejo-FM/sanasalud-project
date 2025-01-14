@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS OLAP.dim_tiempo (
     fecha date NOT NULL,
     dia integer NOT NULL,
     mes integer NOT NULL,
+    mes_desc varchar NOT NULL,
     anio integer NOT NULL,
     PRIMARY KEY (sk_dim_tiempo)
 );
