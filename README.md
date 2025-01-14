@@ -9,10 +9,10 @@ This project is a database for a health insurance company called Sana Salud. It 
 ## Dashboard Images
 
 ### Factura Dashboard
-![Factura Dashboard](https://github.com/Alejo-FM/sanasalud-project/tree/main/public/factura.png)
+![Factura Dashboard](https://github.com/Alejo-FM/sanasalud-project/blob/main/public/Factura.png)
 
 ### Intervención Dashboard
-![Intervención Dashboard](https://github.com/Alejo-FM/sanasalud-project/tree/main/public/intervencion.png)
+![Intervención Dashboard](https://github.com/Alejo-FM/sanasalud-project/blob/main/public/Intervencion.png)
 
 ## Team Members
 - [**Alejandro Molina**](https://github.com/Alejo-FM)
