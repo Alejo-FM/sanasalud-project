@@ -9,6 +9,14 @@ Our solution implements both OLTP (Online Transaction Processing) and OLAP (Onli
 
 This project was developed as part of the Business Intelligence course at Universidad Católica Andrés Bello, under the guidance of Professor Concettina Di Vasta. It represents a practical application of BI concepts in healthcare management.
 
+## Dashboard Images
+
+### Factura Dashboard
+![Factura Dashboard](https://github.com/Alejo-FM/sanasalud-project/blob/main/public/Factura.png)
+
+### Intervención Dashboard
+![Intervención Dashboard](https://github.com/Alejo-FM/sanasalud-project/blob/main/public/Intervencion.png)
+
 ## Team Members
 - [**Alejandro Molina**](https://github.com/Alejo-FM)
 - [**Sandro Portanova**](https://github.com/Sspa1)
@@ -24,16 +32,34 @@ git clone https://github.com/Alejo-FM/sanasalud-project.git
 npm start
 ```
 
-3. Execute the following command to reset the database
+3. Execute the following command to reset the database (delete all and create again) 
 ```bash
 npm run reset
 ```
 
+4. Execute the following command to delete the container
+```bash
+npm run delete
+```
+
+## Details to use the ETLs
+
+To use the ETLs, you need to set the following environment variables in `Edit > Set Environment Variables`:
+
+- `DB_HOST`: The hostname of your database.
+- `DB_USER`: The username to access your database.
+- `DB_PASSWORD`: The password to access your database.
+- `DB_NAME`: The name of your database.
+- `DB_PORT`: The port of your database.
+- `BI_PATH`: The path to the project folder.
+
+Make sure to configure these variables correctly before running the ETLs.
+
 ## Technologies
 - PostgreSQL
 - PowerBI
+- Pentaho Data Integration
 
 <p align="center">
   <a href="https://www.joomla.org/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" width="200" height='150' alt="Joomla Logo" /></a>
   <a href="https://mariadb.org/" target="blank"><img src="https://logodix.com/logo/1960166.png" width="200" height='150' alt="MariaDB Logo" /></a>
-
